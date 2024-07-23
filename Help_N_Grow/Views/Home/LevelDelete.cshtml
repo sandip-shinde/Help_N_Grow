@@ -1,0 +1,27 @@
+﻿@model Help_N_Grow.Entity.Level
+
+@{
+    ViewData["Title"] = "Delete";
+}
+
+<h2>Delete</h2>
+
+<h3>Are you sure you want to delete this?</h3>
+<div>
+    <h4>Level</h4>
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayNameFor(model => model.Level_Name)
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.Level_Name)
+        </dd>
+    </dl>
+    
+    <form asp-action="Delete">
+        <input type="hidden" asp-for="Level_Id" />
+        <input type="submit" value="Delete" class="btn btn-default" /> |
+        <a asp-action="Index" class="btn btn-primary">Back to List</a>
+    </form>
+</div>

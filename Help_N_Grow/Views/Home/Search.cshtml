@@ -1,0 +1,101 @@
+﻿@model IEnumerable<Help_N_Grow.Entity.Registration>
+
+@{
+    ViewData["Title"] = "Search";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h2>Search List</h2>
+
+<table class="table">
+    <thead>
+		<tr>
+			<th>
+				@Html.DisplayNameFor(model => model.Full_Name)
+			</th><th>
+	@Html.DisplayNameFor(model => model.UserName)
+</th>
+			<th>
+				@Html.DisplayNameFor(model => model.Mobile_No)
+			</th>
+			<th>
+				@Html.DisplayNameFor(model => model.Bank_AC)
+			</th>
+			<th>
+				@Html.DisplayNameFor(model => model.IFSC_Code)
+			</th>
+			<th>
+				@Html.DisplayNameFor(model => model.UPI_ID)
+			</th>
+			<th>
+				@Html.DisplayNameFor(model => model.Password)
+			</th>
+			<th>
+				@Html.DisplayNameFor(model => model.Term_Condition_Accepted)
+			</th>
+			<th>
+				@Html.DisplayNameFor(model => model.Role)
+			</th>
+			<th>
+				@Html.DisplayNameFor(model => model.Reg_Date)
+			</th>
+			<th>
+				@Html.DisplayNameFor(model => model.Level_Id)
+			</th>
+			<th>
+				@Html.DisplayNameFor(model => model.Parent_Id)
+			</th>
+			<th>
+				@Html.DisplayNameFor(model => model.Is_Active)
+			</th>
+			<th></th>
+		</tr>
+    </thead>
+    <tbody>
+@foreach (var item in Model) {
+		<tr>
+			<td>
+				@Html.DisplayFor(modelItem => item.Full_Name)
+			</td><td>
+	@Html.DisplayFor(modelItem => item.UserName)
+</td>
+			<td>
+				@Html.DisplayFor(modelItem => item.Mobile_No)
+			</td>
+			<td>
+				@Html.DisplayFor(modelItem => item.Bank_AC)
+			</td>
+			<td>
+				@Html.DisplayFor(modelItem => item.IFSC_Code)
+			</td>
+			<td>
+				@Html.DisplayFor(modelItem => item.UPI_ID)
+			</td>
+			<td>
+				@Html.DisplayFor(modelItem => item.Password)
+			</td>
+			<td>
+				@Html.DisplayFor(modelItem => item.Term_Condition_Accepted)
+			</td>
+			<td>
+				@Html.DisplayFor(modelItem => item.Role)
+			</td>
+			<td>
+				@Html.DisplayFor(modelItem => item.Reg_Date)
+			</td>
+			<td>
+				@Html.DisplayFor(modelItem => item.Level_Id)
+			</td>
+			<td>
+				@Html.DisplayFor(modelItem => item.Parent_Id)
+			</td>
+			<td>
+				@Html.DisplayFor(modelItem => item.Is_Active)
+			</td>
+			<td>
+				<a asp-action="Select" asp-route-id="@item.Reg_Id">Select</a>
+			</td>
+		</tr>
+}
+    </tbody>
+</table>

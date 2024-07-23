@@ -1,0 +1,67 @@
+<Project Sdk="Microsoft.NET.Sdk.Web">
+
+  <PropertyGroup>
+    <TargetFramework>netcoreapp2.1</TargetFramework>
+    <StartupObject></StartupObject>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <Compile Remove="wwwroot\Transacton_Photo\**" />
+    <Content Remove="wwwroot\Transacton_Photo\**" />
+    <EmbeddedResource Remove="wwwroot\Transacton_Photo\**" />
+    <None Remove="wwwroot\Transacton_Photo\**" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <None Include="Views\Account\Index.cshtml" />
+    <None Include="Views\Home\About.cshtml" />
+    <None Include="Views\Home\AdminReports.cshtml" />
+    <None Include="Views\Home\Contact.cshtml" />
+    <None Include="Views\Home\Dashboard.cshtml" />
+    <None Include="Views\Home\DonationReciept.cshtml" />
+    <None Include="Views\Home\Index.cshtml" />
+    <None Include="Views\Home\LevelCreate.cshtml" />
+    <None Include="Views\Home\LevelDelete.cshtml" />
+    <None Include="Views\Home\LevelDetails.cshtml" />
+    <None Include="Views\Home\LevelEdit.cshtml" />
+    <None Include="Views\Home\LevelIndex.cshtml" />
+    <None Include="Views\Home\Main.cshtml" />
+    <None Include="Views\Home\Privacy.cshtml" />
+    <None Include="Views\Home\RegistrationCreate.cshtml" />
+    <None Include="Views\Home\RegistrationDelete.cshtml" />
+    <None Include="Views\Home\RegistrationDetails.cshtml" />
+    <None Include="Views\Home\RegistrationEdit.cshtml" />
+    <None Include="Views\Home\RegistrationIndex.cshtml" />
+    <None Include="Views\Home\Search.cshtml" />
+    <None Include="Views\Home\Select.cshtml" />
+    <None Include="Views\Home\Term_Condition.cshtml" />
+    <None Include="Views\Home\AllMember.cshtml" />
+    <None Include="Views\Home\TransactionApprovalDelete.cshtml" />
+    <None Include="Views\Home\TransactionApprovalDetails.cshtml" />
+    <None Include="Views\Home\TransactionApprovalEdit.cshtml" />
+    <None Include="Views\Home\TransactionApprovalIndex.cshtml" />
+    <None Include="Views\Home\TransactionCreate.cshtml" />
+    <None Include="Views\Home\TransactionDelete.cshtml" />
+    <None Include="Views\Home\TransactionDetails.cshtml" />
+    <None Include="Views\Home\TransactionEdit.cshtml" />
+    <None Include="Views\Home\TransactionIndex.cshtml" />
+    <None Include="Views\Shared\Error.cshtml" />
+    <None Include="Views\Shared\_AdminLayout.cshtml" />
+    <None Include="Views\Shared\_CookieConsentPartial.cshtml" />
+    <None Include="Views\Shared\_Layout.cshtml" />
+    <None Include="Views\Shared\_ValidationScriptsPartial.cshtml" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <PackageReference Include="Microsoft.AspNetCore.App" />
+    <PackageReference Include="PdfSharpCore" Version="1.3.65" />
+    <PackageReference Include="Polybioz.HtmlRenderer.PdfSharp.Core" Version="1.0.0" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Content Update="Views\Shared\_Super_AdminLayout.cshtml">
+      <Pack>$(IncludeRazorContentInPack)</Pack>
+    </Content>
+  </ItemGroup>
+
+</Project>

@@ -1,0 +1,109 @@
+﻿@model IEnumerable<Help_N_Grow.Entity.TblTransactionApproval>
+
+@{
+	ViewData["Title"] = "AllMember";
+	Layout = "~/Views/Shared/_AdminLayout.cshtml";
+}
+
+<h2>AllMember</h2>
+
+<hr />
+	<form asp-action="TransactionApprovalAllMemberFilterBy">
+		<table class="table">
+			<tr>
+				<td>
+					<label >
+						Select Filter:
+					</label>
+				</td>
+				<td>
+					<select name="FilterBy" id="FilterBy">
+						<option value="1">Your ID</option>
+						<option value="2">Head ID</option>
+						<option value="3">Name</option>
+						<option value="4">Mobile Number</option>
+						<option value="5">Level</option>
+					</select>
+				</td>
+				<td><input type="text" id="fillValue" name="fillValue" /></td>
+				<td>
+					<div class="wrap">
+						<button type="submit" value="Save" class="btn btn-primary">
+							Submit
+						</button>
+					</div>
+				</td>
+			</tr>
+		</table>
+	</form>
+
+<table class="table">
+	<thead>
+		<tr>
+			<th>
+				@Html.DisplayNameFor(model => model.Unique_No)
+			</th>
+			<th>
+				@Html.DisplayNameFor(model => model.Full_Name)
+			</th>
+			<th>
+				@Html.DisplayNameFor(model => model.Mobile_No)
+			</th>
+			
+			<th>
+				@Html.DisplayNameFor(model => model.Username)
+			</th>
+			<th>
+				@Html.DisplayNameFor(model => model.Password)
+			</th>
+
+			
+			<th></th>
+		</tr>
+	</thead>
+	<tbody>
+		@foreach (var item in Model)
+		{
+			<tr>
+				<td>
+					@Html.DisplayFor(modelItem => item.Unique_No)
+				</td>
+				<td>
+					@Html.DisplayFor(modelItem => item.Full_Name)
+				</td>
+				<td>
+					@Html.DisplayFor(modelItem => item.Mobile_No)
+				</td>
+				@*<td>
+					@Html.DisplayFor(modelItem => item.Transaction_Date)
+				</td>
+				<td>
+					@Html.DisplayFor(modelItem => item.Transaction_ID)
+				</td>*@
+
+				<td>
+					@Html.DisplayFor(modelItem => item.Username)
+				</td>
+				<td>
+					@Html.DisplayFor(modelItem => item.Password)
+				</td>
+
+				@*<td>
+					@Html.DisplayFor(modelItem => item.Reg_Id)
+				</td>
+				<td>
+					@Html.DisplayFor(modelItem => item.Level_Id)
+				</td>
+				<td>
+					@Html.DisplayFor(modelItem => item.Parent_Id)
+				</td>*@
+
+				@*<td>
+						@Html.ActionLink("Edit", "Edit", new { /* id=item.PrimaryKey */ }) |
+						@Html.ActionLink("Details", "Details", new { /* id=item.PrimaryKey */ }) |
+						@Html.ActionLink("Delete", "Delete", new { /* id=item.PrimaryKey */ })
+					</td>*@
+			</tr>
+		}
+	</tbody>
+</table>

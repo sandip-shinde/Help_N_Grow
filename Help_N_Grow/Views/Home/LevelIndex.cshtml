@@ -1,0 +1,41 @@
+﻿@model IEnumerable<Help_N_Grow.Entity.Level>
+
+@{
+	ViewData["Title"] = "Index";
+	Layout = "~/Views/Shared/_Layout.cshtml";
+}
+<div class="row">
+	<div class="col-md-12"><br />
+		
+		
+	</div>
+</div>
+<h2>Index</h2>
+
+<p>
+    <a asp-action="Create" class="btn btn-primary">Create New</a>
+</p>
+<table class="table">
+    <thead>
+        <tr>
+            <th>
+                @Html.DisplayNameFor(model => model.Level_Name)
+            </th>
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+@foreach (var item in Model) {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.Level_Name)
+            </td>
+            <td>
+                <a asp-action="Edit"  class="btn btn-primary" asp-route-id="@item.Level_Id">Edit</a> |
+                <a asp-action="Details" class="btn btn-primary"  asp-route-id="@item.Level_Id">Details</a> |
+                <a asp-action="Delete" class="btn btn-primary"  asp-route-id="@item.Level_Id">Delete</a>
+            </td>
+        </tr>
+}
+    </tbody>
+</table>

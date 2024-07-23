@@ -1,0 +1,526 @@
+﻿@model Help_N_Grow.Entity.Level
+@{
+	ViewData["Title"] = "Dashboard";
+	Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<style>
+
+	.demo {
+		background: #FAD2C8;
+		padding: 30px 0
+	}
+
+	a {
+		text-decoration: none;
+	}
+
+	.pricingTable {
+		padding: 25px 10px 70px;
+		margin: 0 15px;
+		text-align: center;
+		z-index: 1;
+		position: relative
+	}
+
+		.pricingTable:after,
+		.pricingTable:before {
+			content: "";
+			position: absolute;
+			left: 0
+		}
+
+		.pricingTable .price-value .amount {
+			display: inline-block;
+			font-size: 50px;
+			font-weight: 700
+		}
+
+		.pricingTable .price-value .month {
+			display: block;
+			font-size: 20px;
+			font-weight: 500;
+			line-height: 10px;
+			text-transform: uppercase
+		}
+
+		.pricingTable:before {
+			width: 100%;
+			height: 100%;
+			background: #fff;
+			top: 0;
+			z-index: -1;
+			-webkit-clip-path: polygon(100% 0, 100% 85%, 50% 100%, 0 85%, 0 0);
+			clip-path: polygon(100% 0, 100% 85%, 50% 100%, 0 85%, 0 0)
+		}
+
+		.pricingTable:after {
+			width: 70px;
+			height: 30px;
+			background: #1daa72;
+			margin: 0 auto;
+			top: 70px;
+			right: 0;
+			-webkit-clip-path: polygon(50% 100%, 0 0, 100% 0);
+			clip-path: polygon(50% 100%, 0 0, 100% 0)
+		}
+
+		.pricingTable .title {
+			padding: 15px 0;
+			margin: 0 -25px 30px;
+			background: #1daa72;
+			font-size: 25px;
+			font-weight: 600;
+			color: #fff;
+			text-transform: uppercase;
+			position: relative
+		}
+		.pricingTable .level {
+			padding: 15px 0;
+			margin: 0 -25px 30px;
+			background: #1ff5a0;
+			font-size: 25px;
+			font-weight: 600;
+			color: #fff;
+			text-transform: uppercase;
+			position: relative
+		}
+			.pricingTable .title:after,
+			.pricingTable .title:before {
+				border-top: 15px solid #51836d;
+				border-bottom: 15px solid transparent;
+				position: absolute;
+				bottom: -30px;
+				content: ""
+			}
+
+			.pricingTable .title:before {
+				border-left: 15px solid transparent;
+				left: 0
+			}
+
+			.pricingTable .title:after {
+				border-right: 15px solid transparent;
+				right: 0
+			}
+
+		.pricingTable .price-value {
+			margin-bottom: 25px;
+			color: #1daa72
+		}
+
+		.pricingTable .currency {
+			display: inline-block;
+			font-size: 30px;
+			vertical-align: top;
+			margin-top: 8px
+		}
+
+	.price-value .amount {
+		display: inline-block;
+		font-size: 50px;
+		font-weight: 700
+	}
+
+	.price-value .month {
+		display: block;
+		font-size: 20px;
+		font-weight: 500;
+		line-height: 10px;
+		text-transform: uppercase
+	}
+
+	.pricingTable .pricing-content {
+		padding: 0;
+		margin: 0 0 25px;
+		list-style: none;
+		border-top: 1px solid #8f8f8f;
+		border-bottom: 1px solid #8f8f8f
+	}
+
+		.pricingTable .pricing-content li {
+			font-size: 17px;
+			color: #8f8f8f;
+			line-height: 55px
+		}
+
+	.pricingTable .pricingTable-signup {
+		display: inline-block;
+		padding: 10px 30px;
+		background: #1daa72;
+		font-size: 18px;
+		font-weight: 600;
+		color: #fff;
+		overflow: hidden;
+		position: relative;
+		transition: all .7s ease 0s
+	}
+
+		.pricingTable .pricingTable-signup:before {
+			content: "";
+			display: inline-block;
+			width: 100%;
+			height: 100%;
+			background: linear-gradient(to bottom, rgba(255, 255, 255, 0) 0, rgba(255, 255, 255, 1) 50%, rgba(255, 255, 255, 0) 100%);
+			position: absolute;
+			top: 0;
+			left: 0;
+			opacity: 0;
+			transform: translate(0, 100%);
+			transition: all .6s ease-in-out 0s
+		}
+
+		.pricingTable .pricingTable-signup:hover:before {
+			opacity: 1;
+			transform: translate(0, -100%)
+		}
+
+	.pricingTable.blue .pricingTable-signup,
+	.pricingTable.blue .title,
+	.pricingTable.blue:after {
+		background: #49b0ca
+	}
+
+		.pricingTable.blue .title:after,
+		.pricingTable.blue .title:before {
+			border-top: 15px solid #407a88
+		}
+
+	.pricingTable.blue .price-value {
+		color: #49b0ca
+	}
+
+	.pricingTable.orange .pricingTable-signup,
+	.pricingTable.orange .title,
+	.pricingTable.orange:after {
+		background: #31f30b
+	}
+
+		.pricingTable.orange .title:after,
+		.pricingTable.orange .title:before {
+			border-top: 15px solid #407a88
+		}
+
+	.pricingTable.orange .price-value {
+		color: #31f30b
+	}
+
+	.pricingTable.Gold .pricingTable-signup,
+	.pricingTable.Gold .title,
+	.pricingTable.Gold:after {
+		background: #f9d104
+	}
+
+		.pricingTable.Gold .title:after,
+		.pricingTable.Gold .title:before {
+			border-top: 15px solid #407a88
+		}
+
+	.pricingTable.Gold .price-value {
+		color: #f9d104
+	}
+
+
+	.pricingTable.Million .pricingTable-signup,
+	.pricingTable.Million .title,
+	.pricingTable.Million:after {
+		background: #f5f50b
+	}
+
+		.pricingTable.Million .title:after,
+		.pricingTable.Million .title:before {
+			border-top: 15px solid #407a88
+		}
+
+	.pricingTable.Million .price-value {
+		color: #f5f50b
+	}
+
+	.pricingTable.Silver .pricingTable-signup,
+	.pricingTable.Silver .title,
+	.pricingTable.Silver:after {
+		background: #e5e5e5
+	}
+
+		.pricingTable.Silver .title:after,
+		.pricingTable.Silver .title:before {
+			border-top: 15px solid #407a88
+		}
+
+	.pricingTable.Silver .price-value {
+		color: #e5e5e5
+	}
+
+	.pricingTable.purple .pricingTable-signup,
+	.pricingTable.purple .title,
+	.pricingTable.purple:after {
+		background: #b200ff
+	}
+
+		.pricingTable.purple .title:after,
+		.pricingTable.purple .title:before {
+			border-top: 15px solid #407a88
+		}
+
+	.pricingTable.purple .price-value {
+		color: #b200ff
+	}
+
+
+	.pricingTable.pink .pricingTable-signup,
+	.pricingTable.pink .title,
+	.pricingTable.pink:after {
+		background: #f06ace
+	}
+
+	.pricingTable.pink .price-value {
+		color: #f06ace
+	}
+
+	.pricingTable.pink .title:after,
+	.pricingTable.pink .title:before {
+		border-top: 15px solid #773667
+	}
+</style>
+<script src="https://stackpath.bootstrapcdn.com/bootstrap/5.0.0-alpha1/js/bootstrap.min.js">
+</script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js">
+</script>
+
+<h3><b style="color:deeppink"> @ViewBag.UpgradedMessage</b></h3>
+<div class="demo">
+	<div class="container">
+		<div class="row">
+			@if (@Model.Level_Id == 1)
+			{
+				<div class="col-md-3 col-sm-3">
+					<div class="pricingTable">
+						<h3 class="title">@Model.Package_Name</h3>
+						<h4 class="level">@Model.Level_Name</h4>
+						<div class="price-value">
+							<span class="currency">₹</span>
+							<span class="amount">@Model.Self_Amount*@Model.MemberCount</span>
+							<span class="month">/earnings</span>
+						</div>
+						<ul class="pricing-content">
+
+							<li><b>@Model.Amount</b> /member</li>
+
+						</ul>
+						<a asp-action="Registrationindex" class="btn btn-primary" asp-controller="home">Register Me  </a>
+					</div>
+				</div>
+
+
+			}
+			@if (@Model.Level_Id == 2)
+			{
+				<div class="col-md-3 col-sm-3">
+					<div class="pricingTable">
+						<h3 class="title">@Model.Package_Name</h3>
+						<h4 class="level">@Model.Level_Name</h4>
+						<div class="price-value">
+							<span class="currency">₹</span>
+							<span class="amount">@Model.Self_Amount*@Model.MemberCount</span>
+							<span class="month">/earnings</span>
+						</div>
+						<ul class="pricing-content">
+
+							<li><b>@Model.Amount</b> /member</li>
+
+						</ul>
+						<a asp-action="Registrationindex" class="btn btn-primary" asp-controller="home">Register Me  </a>
+					</div>
+				</div>
+
+
+			}
+			@if (@Model.Level_Id == 3)
+			{
+				<div class="col-md-3 col-sm-3">
+					<div class="pricingTable">
+						<h3 class="title">@Model.Package_Name</h3>
+						<h4 class="level">@Model.Level_Name</h4>
+						<div class="price-value">
+							<span class="currency">₹</span>
+							<span class="amount">@Model.Self_Amount*@Model.MemberCount</span>
+							<span class="month">/earnings</span>
+						</div>
+						<ul class="pricing-content">
+
+							<li><b>@Model.Amount</b> /member</li>
+
+						</ul>
+						<a asp-action="Registrationindex" class="btn btn-primary" asp-controller="home">Register Me  </a>
+					</div>
+				</div>
+
+
+			}
+			@if (@ViewBag.registrationLevel == 4)
+			{
+				<div class="col-md-3 col-sm-3">
+					<div class="pricingTable orange">
+						<h3 class="title">@Model.Package_Name</h3>
+						<h4 class="level">@Model.Level_Name</h4>
+						<div class="price-value">
+							<span class="currency">₹</span>
+							<span class="amount">@Model.Self_Amount*@Model.MemberCount</span>
+							<span class="month">/earnings</span>
+						</div>
+						<ul class="pricing-content">
+
+							<li><b>@Model.Amount</b> /member</li>
+
+						</ul>
+						<a asp-action="Registrationindex" class="btn btn-primary" asp-controller="home">Register Me  </a>
+					</div>
+				</div>
+			}
+			@if (@ViewBag.registrationLevel == 5)
+			{
+				<div class="col-md-3 col-sm-3">
+					<div class="pricingTable purple">
+						<h3 class="title">@Model.Package_Name</h3>
+						<h4 class="level">@Model.Level_Name</h4>
+						<div class="price-value">
+							<span class="currency">₹</span>
+							<span class="amount">@Model.Self_Amount*@Model.MemberCount</span>
+							<span class="month">/earnings</span>
+						</div>
+						<ul class="pricing-content">
+
+							<li><b>@Model.Amount</b> /member</li>
+
+						</ul>
+						<a asp-action="Registrationindex" class="btn btn-primary" asp-controller="home">Register Me  </a>
+					</div>
+				</div>
+			}
+			@if (@ViewBag.registrationLevel == 6)
+			{
+				<div class="col-md-3 col-sm-3">
+					<div class="pricingTable Silver">
+						<h3 class="title">@Model.Package_Name</h3>
+						<h4 class="level">@Model.Level_Name</h4>
+						<div class="price-value">
+							<span class="currency">₹</span>
+							<span class="amount">@Model.Self_Amount*@Model.MemberCount</span>
+							<span class="month">/earnings</span>
+						</div>
+						<ul class="pricing-content">
+
+							<li><b>@Model.Amount</b> /member</li>
+
+						</ul>
+						<a asp-action="Registrationindex" class="btn btn-primary" asp-controller="home">Register Me  </a>
+					</div>
+				</div>
+			}
+			@if (@ViewBag.registrationLevel == 7)
+			{
+				<div class="col-md-3 col-sm-3">
+					<div class="pricingTable Silver">
+						<h3 class="title">@Model.Package_Name</h3>
+						<h4 class="level">@Model.Level_Name</h4>
+						<div class="price-value">
+							<span class="currency">₹</span>
+							<span class="amount">@Model.Self_Amount*@Model.MemberCount</span>
+							<span class="month">/earnings</span>
+						</div>
+						<ul class="pricing-content">
+
+							<li><b>@Model.Amount</b> /member</li>
+
+						</ul>
+						<a asp-action="Registrationindex" class="btn btn-primary" asp-controller="home">Register Me  </a>
+					</div>
+				</div>
+			}
+			@if (@ViewBag.registrationLevel == 8)
+			{
+				<div class="col-md-3 col-sm-3">
+					<div class="pricingTable Million">
+						<h3 class="title">@Model.Package_Name</h3>
+						<h4 class="level">@Model.Level_Name</h4>
+						<div class="price-value">
+							<span class="currency">₹</span>
+							<span class="amount">@Model.Self_Amount*@Model.MemberCount</span>
+							<span class="month">/earnings</span>
+						</div>
+						<ul class="pricing-content">
+
+							<li><b>@Model.Amount</b> /member</li>
+
+						</ul>
+						<a asp-action="Registrationindex" class="btn btn-primary" asp-controller="home">Register Me  </a>
+					</div>
+				</div>
+			}
+			@if (@ViewBag.registrationLevel == 9)
+			{
+				<div class="col-md-3 col-sm-3">
+					<div class="pricingTable Million">
+						<h3 class="title">@Model.Package_Name</h3>
+						<h4 class="level">@Model.Level_Name</h4>
+						<div class="price-value">
+							<span class="currency">₹</span>
+							<span class="amount">@Model.Self_Amount*@Model.MemberCount</span>
+							<span class="month">/earnings</span>
+						</div>
+						<ul class="pricing-content">
+
+							<li><b>@Model.Amount</b> /member</li>
+
+						</ul>
+						<a asp-action="Registrationindex" class="btn btn-primary" asp-controller="home">Register Me  </a>
+					</div>
+				</div>
+			}
+			@if (@ViewBag.registrationLevel == 10)
+			{
+				<div class="col-md-3 col-sm-3">
+					<div class="pricingTable Million">
+						<h3 class="title">Millioniore</h3>
+						<div class="price-value">
+							<span class="currency">₹</span>
+							<span class="amount">100000</span>
+							<span class="month">/earnings</span>
+						</div>
+						<ul class="pricing-content">
+
+							<li><b></b>Bonus</li>
+						</ul>
+
+					</div>
+				</div>
+			}
+			@*<div class="col-md-9 col-sm-9">
+			ये मैंने अपनी मर्जीसे हेल्प सेण्टर लोगोंको मदत करने की हेतु और उनकी इकनोमिक हेल्प करने के लिए शुरू किया है | इसमें जो भी लोग खुशीसे दुसरो की  मदत करने को इच्छुक है या फिर मदत लेने को इच्छुक है ऐसेही लोगोंको हेल्प सेण्टर से जोड़ना चाहता हु |क्यूंकि जब तक मैं जीवित हूँ , मेरे हेल्प सेण्टर से जुड़ा हुआ कोई भी इन्सान वो कोई भी उम्र का हो , जाती का हो , चाहे वो मदत करने के लिए जुड़ा हो या मदत लेने के लिए मेरी हेल्प सेण्टर उन सभी तमाम लोगों के हर खुशीमे और कितनी भी मुसीबत हो हमेशा खड़े रहेंगे | उनका हर दर्द हमारा सबका दर्द होगा | मैं बस उन तमाम लोगोंको एक साथ लेके एक मिलेनिअर समाज बनाना चाहता हूँ |उसमे बस एक कदम आपका साथ चाहिए जिससे दूसरों के साथ अपना खुद का भी इकनोमिक हेल्थ सुधरे | लोग अपने शरीर की हेल्थ कोतो ध्यान देते है , लेकिन उस चक्कर मैं अपनी पूरी इकनोमिक हेल्थ बिघड जाती है |  अपनी जिंदग मैं आपमेसे हर एक ने कभी तो जुगाड़ खेला होगा पार्टी की होगी ,शेयर बाजार मैं पैसे लगाया होगा , या बहोतसे बिसिनेस्स में पैसे लगा के मेहनत करते होंगे |लेकिन आपकी इकनोमिक हेल्थ  कभी सुधरी नहीं होंगी | आप बस एक एक पैसे के लिए तरसते होंगे | कोईभी आपका अपना जैसा हो या सगा मदत के टाइम पे मदत नहीं करता | इसलिए कर्जा लेना पड़ता है | वो चुकाते चुकाते जिंदगी गुजर जाती है | तो ऐसी जिंदगी गुजरने से अच्छा ......
+
+			उसी जिंदगी के मेहनत के सिर्फ २१०० रुपए लेंगे हेल्प सेण्टर आ जाओ उसके बाद अपनी हर समस्या का समाधान और कितना भी कर्जा हो वो भरने के लिए हेल्प आपको हेल्प सेंटर से मिलेगी | सिर्फ मदत की नहीं पूरी जिंदगी कभी आप किसीसे कर्जा लेने की जरुरत नहीं पड़ेगी | बस प्राथना ये है की आते समय आपने आसपास जितने भी जरुरत मंद लोग है ,जोकर्ज मैं दुबे हो ,गरीब हो जिसको अपन खुद का माकन, गाड़ी लेने की मन हो लेकिन आप के पास कुछ भी पैसा नहीं है ,तो हम आपकी हेल्प सेंटर के माध्यम से बिना किसी ब्याज से बिना रिफंड पूरी मदत करेंगे | जो लोग मदत करेंगे वो पूरी तरह से नॉन रिफंडेबल और नो इंटरेस्ट होगी जो की पूरी तरह से आपकी होगी | उस मदत के  साथ ही हमारी हेल्प सेण्टर बभी जहा लगेगा वहाँ एक्स्ट्रा मदत भी करेगा |
+
+			ऊपर की सभी हेल्प सेण्टर की बातें मैं जीवित हु तब तक ही लागु रहेगी मेरे बाद , मेरे बच्चे या जो भी लीगल वारिस होगा वो चालू रखना या बंद करना उनकी मर्जी पर होगा | उनके ऊपर मेरी कोई भी बात लागु नहीं होंगी |क्योकि ये पुअरली मेरा सपना है| उनका इसमें फ़िलहाल कोई रोल नहीं है |आगे आप सभी कि सेवा करने  हेल्प सेण्टर शुरू रखना चाहते है, तो आप सभी  ऐसे ही साथ रहिए | जय हिन्द | जय आप सभी |
+
+		</div>*@
+			<div class="col-md-9 col-sm-9">
+				<h2>Your Growth is Our Priority!!!</h2>
+				<p>
+					Dear All,
+					As we continuously strive to grow and evolve, we are excited to remind you of the invaluable opportunities available within our organization. Our Internal Portal has been a great success, enabling numerous peoples to find help and growth that match their skill sets and life aspirations.
+
+				</p><h4>Make Your Money Work | Disciplined Approach Towards Achieving Financial Independence</h4>
+					<p>
+						Join us for a special session on Personal Help & Growth Awareness, hosted by us and presented by the esteemed company.
+					</p>
+						<p>
+
+						In today's social media age, it's crucial to cut through the noise and take a disciplined approach to managing your finances. This session will guide you through the essential steps for creating a personal grow plan and achieving your long-term goals. Don't miss this opportunity to gain valuable insights and take control of your financial future!
+					</p>
+
+
+			</div>
+			</div>
+		</div>
+</div>
+

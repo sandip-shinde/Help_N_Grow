@@ -1,0 +1,259 @@
+﻿@{
+	ViewBag.Title = "Economic Help and Growth Center";
+}
+
+<style>
+	/*style.css*/
+	body {
+		display: flex;
+		align-items: center;
+		justify-content: center;
+		font-family: sans-serif;
+		line-height: 1.5;
+		min-height: 100vh;
+		background: #f3f3f3;
+		flex-direction: column;
+		margin: 0;
+	}
+
+	form {
+		width: 250px;
+		margin-left: 138px;
+	}
+
+	.main {
+		background-color: #fff;
+		border-radius: 15px;
+		box-shadow: 0 0 20px rgba(0, 0, 0, 0.2);
+		padding: 10px 20px;
+		transition: transform 0.2s;
+		width: 500px;
+		text-align: center;
+	}
+
+	h1 {
+		color: #4CAF50;
+	}
+
+	label {
+		display: block;
+		width: 100%;
+		margin-top: 10px;
+		margin-bottom: 5px;
+		text-align: left;
+		color: #555;
+		font-weight: bold;
+	}
+
+
+	input {
+		display: block;
+		width: 100%;
+		margin-bottom: 15px;
+		padding: 10px;
+		box-sizing: border-box;
+		border: 1px solid #ddd;
+		border-radius: 5px;
+	}
+
+	button {
+		padding: 15px;
+		border-radius: 10px;
+		margin-top: 15px;
+		margin-bottom: 15px;
+		border: none;
+		color: white;
+		cursor: pointer;
+		background-color: #4CAF50;
+		width: 100%;
+		font-size: 16px;
+	}
+
+	.wrap {
+		display: flex;
+		justify-content: center;
+		align-items: center;
+	}
+
+	.gradient-custom-2 {
+		/* fallback for old browsers */
+		background: #fccb90;
+		/* Chrome 10-25, Safari 5.1-6 */
+		background: -webkit-linear-gradient(to right, #ee7724, #d8363a, #dd3675, #b44593);
+		/* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */
+		background: linear-gradient(to right, #ee7724, #d8363a, #dd3675, #b44593);
+	}
+</style>
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<title>Economic Help and Growth Center</title>
+	<style>
+		body {
+			font-family: Arial, sans-serif;
+			margin: 0;
+			padding: 0;
+		}
+
+		header {
+			display: flex;
+			align-items: center;
+			padding: 20px;
+			background-color: #00bfff;
+			color: white;
+		}
+
+			header img {
+				height: 77px;
+			}
+
+		nav a {
+			color: white;
+			margin: 0 15px;
+			text-decoration: none;
+		}
+
+		.hero {
+			background-image: url('cityscape.jpg'); /* Replace with your image path */
+			background-size: cover;
+			background-position: center;
+			color: green;
+			text-align: center;
+		}
+
+			.hero h1 {
+				font-size: 3em;
+			}
+
+			.hero p {
+				font-size: 1.5em;
+			}
+
+			.hero button {
+				background-color: #FF5722;
+				border: none;
+				padding: 15px 30px;
+				font-size: 1em;
+				color: green;
+				cursor: pointer;
+			}
+
+		.content {
+			padding: 20px;
+		}
+
+		.section {
+			margin: 40px 0;
+		}
+
+			.section img {
+				width: 100%;
+				max-width: 400px;
+				height: auto;
+				display: block;
+				margin: 0 auto;
+			}
+
+		.services, .resources {
+			display: flex;
+			justify-content: space-between;
+		}
+
+			.services div, .resources div {
+				flex: 1 1 45%;
+				box-sizing: border-box;
+				padding: 10px;
+			}
+
+		.footer {
+			background-color: #333;
+			color: white;
+			padding: 20px;
+			text-align: center;
+		}
+
+			.footer a {
+				color: #FF5722;
+				text-decoration: none;
+			}
+
+			.footer form input {
+				padding: 10px;
+				margin: 5px 0;
+			}
+
+			.footer form button {
+				padding: 10px;
+				background-color: #FF5722;
+				color: white;
+				border: none;
+				cursor: pointer;
+			}
+	</style>
+</head>
+<body>
+	<header>
+		<img src="~/Logo_Img/Economic_Help_Logo.JPG" alt="Economic Help and Growth Center Logo"> <!-- Replace with your logo path -->
+		<h3>  Economic Help and Growth Center </h3>
+		<nav style="justify-content: space-between;padding-left: 30%;">
+			<a href="/home/main">Home</a>
+		</nav>
+	</header>
+	<div class="main">
+		@*<h1>Economic Help and Growth Center</h1>*@
+		<h3>Login</h3>
+		<div style="color:red">
+			@ViewBag.username
+		</div>
+		<form asp-action="Index">
+			<label for="username">
+				Username:
+			</label>
+			<input type="text"
+				   id="username"
+				   name="username"
+				   placeholder="Enter your Registered User Name" required>
+			<label for="passcode">
+				Password:
+			</label>
+			<input type="password"
+				   id="passcode"
+				   name="passcode"
+				   placeholder="Enter your Password" required>
+
+			<label for="role">
+				Select Role:
+			</label>
+			<select name="role" id="role">
+				<option value="Member">Member</option>
+				<option value="User">User</option>
+				<option value="Admin">Admin</option>
+				<option value="Super_Admin">Super_Admin</option>
+			</select>
+
+			<div class="wrap">
+				<button type="submit">
+					Submit
+				</button>
+			</div>
+		</form>
+
+	</div>
+
+	<div class="footer">
+		<div class="section" id="Contact">
+			<h6>Contact Information</h6>
+			<p>Address:</p><p> No 235,13th Cross,,Hoyasala Nagar 2nd Stage Indiranagar,Bangalore-560038</p>
+			@*<p>Phone: </p>*@
+			<p>
+				Email: support@economichelpandgrowthcenter.com
+			</p>
+
+		</div>
+	</div>
+</body>
+</html>
+

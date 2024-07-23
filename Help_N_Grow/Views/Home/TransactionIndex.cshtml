@@ -1,0 +1,107 @@
+﻿@model IEnumerable<Help_N_Grow.Entity.TblTransaction>
+
+@{
+	ViewData["Title"] = "Index";
+	Layout = "~/Views/Shared/_Layout.cshtml";
+}
+<div class="row">
+	<div class="col-md-12">
+		<br />
+
+	</div>
+</div>
+
+<h2>Transaction List</h2>
+<h3><b style="color:deeppink"> @ViewBag.UpgradedMessage</b></h3>
+<a asp-area="" asp-controller="Home" class="btn btn-primary" asp-action="RegistrationIndex">Go to Registration List</a>
+
+@*@if (@ViewBag.showCreate)
+	{
+		<a asp-area="" asp-controller="Registration" class="btn btn-primary" asp-action="Index">Go to Registration List</a>
+
+	}
+	else
+	{
+		<a asp-area="" asp-controller="Registration" class="btn btn-primary" asp-action="Index">Go to Registration List</a>
+	}*@
+
+<table class="table">
+	<thead>
+		<tr>
+
+			<th>
+				<span>Download Reciept</span>
+			</th>
+			<th>
+			View Company Transaction
+			</th>
+			<th> View Member Transaction</th>
+			<th>
+				@Html.DisplayNameFor(model => model.Transaction_No)
+			</th>
+			<th>
+				@Html.DisplayNameFor(model => model.Transaction_NoSelf)
+			</th>
+			<th>
+				@Html.DisplayNameFor(model => model.Is_Approved)
+			</th>
+			<th>
+				@Html.DisplayNameFor(model => model.Reg_Id)
+			</th>
+
+			<th>Note</th>
+		</tr>
+	</thead>
+	<tbody>
+		@foreach (var item in Model)
+		{
+		<tr>
+
+			<td>
+				@*@if (item.Is_Approved)
+			{
+				<a asp-action="TransactionEdit" asp-route-id="@item.Transaction_ID" class="btn btn-primary">DownloadReciept</a>
+
+			}*@
+				@*else
+			{
+				<a asp-controller="Transaction" asp-action="NewCreateForReplace" asp-route-id="@item.Reg_Id"> Add Transaction Detail</a>
+
+			}*@
+
+			</td>
+			<td>
+				@Html.ActionLink("View", "ViewCompanyPhoto", new { Transactionid = item.Transaction_ID, })
+			</td>
+			<td>
+				@Html.ActionLink("View", "ViewMemberPhoto", new { Transactionid = item.Transaction_ID })
+			</td>
+			<td>
+				@Html.DisplayFor(modelItem => item.Transaction_No)
+			</td>
+			<td>
+				@Html.DisplayFor(modelItem => item.Transaction_NoSelf)
+			</td>
+			@if (item.Is_Approved)
+			{
+				<td style="background-color:green">
+					@Html.DisplayFor(modelItem => item.Is_Approved)
+				</td>
+			}
+			else
+			{
+				<td style="background-color:red">
+					@Html.DisplayFor(modelItem => item.Is_Approved)
+				</td>
+			}
+
+
+				<td>
+					@Html.DisplayFor(modelItem => item.Parent_Id)/@Html.DisplayFor(modelItem => item.Reg_Id)/@Html.DisplayFor(modelItem => item.Level_Id)
+				</td>
+
+				<td>	@Html.DisplayFor(modelItem => item.Note)</td>
+		</tr>
+		}
+	</tbody>
+</table>

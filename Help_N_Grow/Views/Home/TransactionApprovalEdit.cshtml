@@ -1,0 +1,125 @@
+﻿@model Help_N_Grow.Entity.TblTransaction
+
+@{
+	ViewData["Title"] = "Edit";
+	Layout = "~/Views/Shared/_Super_AdminLayout.cshtml";
+}
+<div class="row">
+	<div class="col-md-12">
+		<br />
+
+	</div>
+</div>
+<h4>Approve Transaction</h4><br /><div>
+	<a asp-controller="Home" asp-action="TransactionApprovalIndex">Back to List</a>
+</div>
+<hr />
+
+<div class="row">
+	
+		<div class="col-md-8">
+			<table class="dl-horizontal">
+				<tr>
+					<td>
+						@Html.DisplayNameFor(model => model.Transaction_ID)
+					</td>
+					<td>
+						@Html.DisplayNameFor(model => model.T_Date)
+					</td>
+
+				</tr>
+				<tr>
+					<td>
+						@Html.DisplayFor(model => model.Transaction_ID)
+					</td>
+
+					<td>
+						@Html.DisplayFor(model => model.T_Date)
+					</td>
+
+				</tr>
+
+			</table>
+
+			<table class="table">
+				<thead>
+					<tr>
+						<th colspan="2">
+							Company Transaction
+						</th>
+						<th colspan="2">
+							Member Transaction
+						</th>
+
+					</tr>
+				</thead>
+				<tbody>
+					<tr>
+						<td colspan="2"><b>	@Html.DisplayFor(model => model.Transaction_No)</b></td>
+						<td colspan="2"> <b>	@Html.DisplayFor(model => model.Transaction_NoSelf)</b></td>
+					</tr>
+					<tr>
+						<td>
+							@Html.ActionLink("View", "ViewCompanyPhoto", new { Transactionid = Model.Transaction_ID, })
+						</td>
+						<td>
+							@Html.ActionLink("Download", "DownloadCompanyPhoto", new { Transactionid = Model.Transaction_ID, FileName = Model.Upload_Path })
+						</td>
+						<td>
+							@Html.ActionLink("View", "ViewMemberPhoto", new { Transactionid = Model.Transaction_ID })
+						</td>
+
+						<td>
+							@Html.ActionLink("Download", "DownloadMemberPhoto", new { Transactionid = Model.Transaction_ID, FileName = Model.Upload_PathSelf })
+						</td>
+					</tr>
+
+					<tr>
+						<td colspan="2">
+							<div class="form-group">
+								@*<img src="~/Transacton_Photo/@Model.Upload_Path" alt="" height=100 width=200 />*@
+								<img id="CompanyTransactionPhoto" class="img-responsive full-width" src="data:image/jpeg;base64,@Convert.ToBase64String(@Model.CompanyTransactionPhoto)" />
+							</div>
+						</td>
+						<td colspan="2">
+							<div class="form-group">
+								@*<img src="~/Transacton_Photo/@Model.Upload_PathSelf" alt="" height=100 width=200 />*@
+								<img id="MemberTransactionPhoto" class="img-responsive full-width" src="data:image/jpeg;base64,@Convert.ToBase64String(@Model.MemberTransactionPhoto)" />
+
+							</div>
+						</td>
+					</tr>
+				</tbody>
+
+			</table>
+
+		</div>
+		<div class="col-md-4">
+			<form asp-action="TransactionApprovalEdit">
+				<div asp-validation-summary="ModelOnly" class="text-danger"></div>
+				<input type="hidden" asp-for="Transaction_ID" />
+				<div class="form-group">
+					<div class="checkbox">
+						<label>
+							<input asp-for="Is_Approved" /> @Html.DisplayNameFor(model => model.Is_Approved)
+						</label>
+					</div>
+				</div>
+
+				<div class="form-group">
+					@Html.DisplayNameFor(model => model.Note)
+					@Html.EditorFor(model => model.Note)
+				</div>
+				<div class="form-group">
+					<input type="submit" value="Save" class="btn btn-primary" />
+				</div>
+
+			</form>
+		</div>	
+</div>
+
+
+
+@section Scripts {
+	@{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+}

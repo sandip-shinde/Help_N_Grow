@@ -1,0 +1,104 @@
+﻿@model IEnumerable<Help_N_Grow.Entity.TblTransactionApproval>
+
+@{
+	ViewData["Title"] = "Index";
+	Layout = "~/Views/Shared/_Super_AdminLayout.cshtml";
+}
+
+<div class="row">
+	<div class="col-md-12">
+		<br />
+
+	</div>
+</div>
+<h2>Index</h2>
+<form  asp-action="TransactionApprovalFilterBy" asp-controller="Home">
+	<table class="table">
+		<tr>
+			<td>
+				<label for="IsApproved">
+					Select Filter:
+				</label>
+			</td>
+			<td>
+				<select name="IsApproved" id="IsApproved">
+					<option value="All">All</option>
+					<option value="Approved">Approved</option>
+					<option value="NotApproved">Not Approved</option>
+				</select>
+			</td>
+			<td>
+				<div class="wrap">
+					<button type="submit"  value="Save" class="btn btn-primary" >
+						Submit
+					</button>
+				</div>
+			</td>
+			</tr>
+</table>
+</form>
+<table class="table">
+	<thead>
+		<tr>
+
+			<th></th>
+			<th>
+				@Html.DisplayNameFor(model => model.Is_Approved)
+			</th>@*<th>
+			@Html.DisplayNameFor(model => model.Upload_Path)
+		</th>*@
+			<th>
+				@Html.DisplayNameFor(model => model.Unique_No)
+			</th>
+			<th>
+				@Html.DisplayNameFor(model => model.Full_Name)
+			</th>
+
+			<th>
+				@Html.DisplayNameFor(model => model.Transaction_No)
+			</th>
+			<th>
+				@Html.DisplayNameFor(model => model.Company_Percentage)
+			</th>
+			<th>
+				@Html.DisplayNameFor(model => model.Transaction_Date)
+			</th>
+
+		</tr>
+	</thead>
+	<tbody>
+		@foreach (var item in Model)
+		{
+			string style = item.Is_Approved == true ? "color:Green" : "color:Red";
+
+		<tr style="@style">
+			<td>
+				<a asp-action="TransactionApprovalEdit" asp-controller="Home" asp-route-id="@item.Transaction_ID" class="btn btn-primary">Edit</a> 
+			</td><td>
+				@Html.DisplayFor(modelItem => item.Is_Approved)
+			</td>
+				@*<td>
+			@Html.DisplayFor(modelItem => item.Upload_Path)
+		</td>*@
+			<td>
+				@Html.DisplayFor(modelItem => item.Unique_No)
+			</td>
+			<td>
+				@Html.DisplayFor(modelItem => item.Full_Name)
+			</td>
+
+			<td>
+				@Html.DisplayFor(modelItem => item.Transaction_No)
+			</td>
+			<td>
+				@Html.DisplayFor(modelItem => item.Company_Percentage)
+			</td>
+			<td>
+				@Html.DisplayFor(modelItem => item.Transaction_Date)
+
+			</td>
+
+		</tr>
+		}
+	</tbody>
+</table>

@@ -1,0 +1,53 @@
+﻿@model Help_N_Grow.Entity.TblTransaction
+
+@{
+	ViewData["Title"] = "Details";
+	Layout = "~/Views/Shared/_AdminLayout.cshtml";
+}
+
+
+<h2>Details</h2>
+
+<div>
+	<h4>Transaction</h4>
+	<hr />
+	<dl class="dl-horizontal">
+		<dt>
+			@Html.DisplayNameFor(model => model.Upload_Path)
+		</dt>
+		<dd>
+			@Html.DisplayFor(model => model.Upload_Path)
+		</dd>
+		<dt>
+			@Html.DisplayNameFor(model => model.Transaction_No)
+		</dt>
+		<dd>
+			@Html.DisplayFor(model => model.Transaction_No)
+		</dd>
+		<dt>
+			@Html.DisplayNameFor(model => model.Is_Approved)
+		</dt>
+		<dd>
+			@Html.DisplayFor(model => model.Is_Approved)
+		</dd>
+		<dt>
+			@Html.DisplayNameFor(model => model.Reg_Id)
+		</dt>
+		<dd>
+			@Html.DisplayFor(model => model.Reg_Id)
+		</dd>
+		<dt>
+			@Html.DisplayNameFor(model => model.Level_Id)
+		</dt>
+		<dd>
+			@Html.DisplayFor(model => model.Level_Id)
+		</dd>
+	</dl>
+
+	<img src="@Model.Upload_Path" alt="" height=100 width=200 />
+
+</div>
+<div>
+	<a asp-action="Edit" asp-route-id="@Model.Transaction_ID" class="btn btn-primary">Edit</a> |
+	<a asp-action="Index" class="btn btn-primary">Back to List</a>
+</div>

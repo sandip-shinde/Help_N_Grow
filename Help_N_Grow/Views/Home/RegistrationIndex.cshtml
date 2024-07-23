@@ -1,0 +1,226 @@
+﻿@model Help_N_Grow.Entity.RegistrationViewModel
+
+@{
+	ViewData["Title"] = "Register List";
+	Layout = "~/Views/Shared/_Layout.cshtml";
+}
+<script>
+	// We need to keep track of faded in elements so we can apply fade out later in CSS
+	function ShowHide() {
+		var x = document.getElementById("tblOldMember");
+		var y = document.getElementById("Membertbl");
+		if (x.style.display === "none") {
+			x.style.display = "";
+			y.style.display = "none";
+		} else {
+			x.style.display = "none";
+			y.style.display = "";
+		}
+	}
+</script>
+<style>
+	#tblOldMember th {
+		background-color: #d3d7da !important;
+	}
+</style>
+
+<div class="row">
+	<div class="col-md-12">
+		<br />
+
+	</div>
+</div>
+<h2>Member List</h2>
+
+
+
+<h3><b style="color:deeppink"> @ViewBag.UpgradedMessage</b></h3>
+@if (Model.registration.Level_Id == 1 || Model.registration.Level_Id == 4 || Model.registration.Level_Id == 7)
+{
+	<p>
+		@if (Model.showCreate == "true")
+		{
+			<a asp-action="RegistrationCreate" class="btn btn-primary">Register New Member</a>
+		}
+		@if (Model.showCreate == "Pending")
+		{
+			<span style="color:orangered"> follow up for approve transaction to complete step</span>
+		}@if (Model.showCreate == "false")
+		{
+			<span style="color:orangered"> Upgrade to next level and Get More Benefits</span>
+			@*<a asp-area="" asp-controller="Home" asp-action="MemberUpgradeToNextLevel"  asp-route-id="@ViewBag.Parent_Id"> Upgrade To Next Step</a>*@
+
+		}
+	</p>
+}
+else
+{
+
+	<div class="row">
+		<div class="col-md-12">
+
+			@if (Model.showCreate == "true")
+			{
+
+				<table class="table">
+					<tr><td colspan="5"><b style="color:red">   </b></td></tr>
+					<tr>
+						<td><a asp-action="RegistrationCreate" class="btn btn-primary">Register New Member</a></td>
+
+						<td>
+							<div class="wrap">
+								<button type="button" class="btn btn-primary" onclick="ShowHide()">
+									View Old Member
+								</button>
+							</div>
+						</td>
+					</tr>
+				</table>
+				<form asp-action="RegistrationOld">
+					<table id="tblOldMember" style="display:none">
+						<thead style="background-color:#d3d7da !important"><tr><th>Member ID</th><th>Full Name</th><th></th></tr></thead>
+						@foreach (var member in Model.oldMemberLst)
+						{
+							<tr>
+								<td>@Html.DisplayFor(modelItem => member.Unique_No)</td>
+								<td>@Html.DisplayFor(modelItem => member.Member_Name)</td>
+								<td>
+									<input type="text" id="MemberID" name="MemberID" style="display:none" value="@member.Member_Id" />
+
+									<button type="submit" class="btn btn-info">Add Old Member</button>
+								</td>
+							</tr>
+
+
+						}
+					</table>
+				</form>
+			}
+			@if (Model.showCreate == "Pending")
+			{
+				<span style="color:orangered"> follow up for approve transaction to complete step</span>
+			}@if (Model.showCreate == "false")
+			{
+				<span style="color:orangered"> Upgrade to next level and Get More Benefits</span>
+				@*<a asp-area="" asp-controller="Home" asp-action="MemberUpgradeToNextLevel"  asp-route-id="@ViewBag.Parent_Id"> Upgrade To Next Step</a>*@
+			}
+		</div>
+	</div>
+}
+
+<table class="table" id="Membertbl">
+	<thead>
+		<tr>
+			<th>Download Membership</th>
+			<th>
+
+				Is_Approved
+			</th>
+			<th>
+				Unique No
+			</th>
+			<th>
+				Full_Name
+			</th>
+
+			<th>
+				Mobile_No
+			</th>
+			@*	<th>
+					@Html.DisplayNameFor(model => model.Registrationobj.Bank_AC)
+				</th>
+				<th>
+					@Html.DisplayNameFor(model => model.Registrationobj.IFSC_Code)
+				</th>
+				<th>
+					@Html.DisplayNameFor(model => model.Registrationobj.UPI_ID)
+				</th>
+				<th>
+					@Html.DisplayNameFor(model => model.Registrationobj.Term_Condition_Accepted)
+				</th>
+					<th>
+						@Html.DisplayNameFor(model => model.Registrationobj.Reg_Date)
+					</th>*@
+			<th>
+
+				Level_Id
+			</th>
+			<th>
+				Parent_Id
+			</th>
+			<th>
+				Is_Active
+			</th>
+			<th></th>
+		</tr>
+	</thead>
+	<tbody>
+		@foreach (var item in Model.RegistrationoVMLst)
+		{
+			bool Is_Approved = item.Is_Approved == "Not Approved" ? false : true;
+			string style = Is_Approved == true ? "background-color:Green" : "background-color:Red";
+			<tr>
+				<td>
+					<a asp-action="downloadmembershipSlip" style="display:@Is_Approved" asp-route-id="@item.Registrationobj.Reg_Id" class="btn btn-primary">Registration Slip</a>
+				</td>
+				<td style="@style">
+					@Html.DisplayFor(modelItem => item.Is_Approved)
+				</td>
+				<td>
+					@Html.DisplayFor(modelItem => item.Registrationobj.UserName)
+				</td>
+				<td>
+					@Html.DisplayFor(modelItem => item.Registrationobj.Full_Name)
+				</td>
+
+				<td>
+					@Html.DisplayFor(modelItem => item.Registrationobj.Mobile_No)
+				</td>
+				@*<td>
+						@Html.DisplayFor(modelItem => item.Registrationobj.Bank_AC)
+					</td>
+					<td>
+						@Html.DisplayFor(modelItem => item.Registrationobj.IFSC_Code)
+					</td>
+					<td>
+						@Html.DisplayFor(modelItem => item.Registrationobj.UPI_ID)
+					</td
+
+					<td>
+						@Html.DisplayFor(modelItem => item.Registrationobj.Term_Condition_Accepted)
+					</td>>
+						<td>
+							@Html.DisplayFor(modelItem => item.Registrationobj.Reg_Date)
+						</td>*@
+				<td>
+					@Html.DisplayFor(modelItem => item.Registrationobj.Level_Id)
+				</td>
+				<td>
+					@Html.DisplayFor(modelItem => item.Registrationobj.Parent_Id)
+				</td>
+				<td>
+					@Html.DisplayFor(modelItem => item.Registrationobj.Is_Active)
+				</td>
+				<td>
+					<a asp-action="RegistrationDetails" asp-route-id="@item.Registrationobj.Reg_Id" class="btn btn-primary">View Details</a>
+					@if (item.Is_Approved == "Approved")
+					{
+						<a asp-controller="Home" asp-action="TransactionNewIndex" class="btn btn-primary" asp-route-id="@item.Registrationobj.Reg_Id">Transaction List</a>
+					}
+					else
+					{
+						<a asp-area="" asp-controller="Home" asp-action="TransactionNCreate" asp-route-id="@item.Registrationobj.Reg_Id"> Add Transaction Detail</a>
+					}
+
+
+				</td>
+			</tr>
+		}
+	</tbody>
+</table>
+@if (Model.RegistrationoVMLst.Count != 0)
+{
+<p>
+	<a asp-action="downloadAllmembershipSlip" asp-route-id="@Model.registration.Reg_Id" class="btn btn-primary">Download My All Member List</a>
+</p>
+}

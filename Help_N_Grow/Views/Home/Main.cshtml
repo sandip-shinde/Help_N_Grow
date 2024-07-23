@@ -1,0 +1,189 @@
+﻿<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<title>Economic Help and Growth Center</title>
+	<style>
+		body {
+			font-family: Arial, sans-serif;
+			margin: 0;
+			padding: 0;
+		}
+
+		header {
+			display: flex;
+			align-items: center;
+			padding: 20px;
+			background-color: #00bfff;
+			color: white;
+		}
+
+			header img {
+				height: 77px;
+			}
+
+		nav a {
+			color: white;
+			margin: 0 15px;
+			text-decoration: none;
+		}
+
+		.hero {
+			background-image: url('cityscape.jpg'); /* Replace with your image path */
+			background-size: cover;
+			background-position: center;
+			color: green;
+			text-align: center;
+		}
+
+			.hero h1 {
+				font-size: 3em;
+			}
+
+			.hero p {
+				font-size: 1.5em;
+			}
+
+			.hero button {
+				background-color: #FF5722;
+				border: none;
+				padding: 15px 30px;
+				font-size: 1em;
+				color: green;
+				cursor: pointer;
+			}
+
+		.content {
+			padding: 20px;
+		}
+
+		.section {
+			margin: 40px 0;
+		}
+
+			.section img {
+				width: 100%;
+				max-width: 400px;
+				height: auto;
+				display: block;
+				margin: 0 auto;
+			}
+
+		.services, .resources {
+			display: flex;
+			justify-content: space-between;
+		}
+
+			.services div, .resources div {
+				flex: 1 1 45%;
+				box-sizing: border-box;
+				padding: 10px;
+			}
+
+		.footer {
+			background-color: #333;
+			color: white;
+			padding: 20px;
+			text-align: center;
+		}
+
+			.footer a {
+				color: #FF5722;
+				text-decoration: none;
+			}
+
+			.footer form input {
+				padding: 10px;
+				margin: 5px 0;
+			}
+
+			.footer form button {
+				padding: 10px;
+				background-color: #FF5722;
+				color: white;
+				border: none;
+				cursor: pointer;
+			}
+	</style>
+</head>
+<body>
+	<header>
+		<img src="~/Logo_Img/Economic_Help_Logo.JPG" alt="Economic Help and Growth Center Logo"> <!-- Replace with your logo path -->
+		<h3>  Economic Help and Growth Center </h3>
+		<nav style="justify-content: space-between;padding-left: 30%;">
+			<a href="/home/main">Home</a>
+			<a href="#services">Services</a>
+			<a href="#Contact">Contact Us</a>
+		</nav>
+	</header>
+	<div class="hero">
+		<h2>Empowering Economic Growth for a Brighter Future</h2>
+		<p>Providing Resources, Support, and Guidance to Foster Financial Stability and Growth</p>
+		
+			<a asp-area="" asp-controller="Home" asp-action="index" class="navbar-brand">Get Started</a>
+		
+	</div>
+	<div class="content">
+		<div class="section" id="mission">
+			<img alt="People working together" src="https://img.freepik.com/premium-vector/three-people-working-together-get-success-flag-one-line-art_718518-2063.jpg" width="300" height="200" class="_9zid0k3 _1286nb1h _1286nb1k _1286nb18f _1286nb13df _1286nb13jl _1286nb16 _1286nb19f" style="max-width:calc((25vh - 25px) * 1.501)" fetchpriority="high">
+			<h4>Our Mission- Your Growth is Our Priority!!!</h4>
+			<p>
+				Dear All,
+				As we continuously strive to grow and evolve, we are excited to remind you of the invaluable opportunities available within our organization. Our Internal Portal has been a great success, enabling numerous peoples to find help and growth that match their skill sets and life aspirations.
+
+			</p><h4>Make Your Money Work | Disciplined Approach Towards Achieving Financial Independence</h4>
+			<p>
+				Join us for a special session on Personal Help & Growth Awareness, hosted by us and presented by the esteemed company.
+			</p>
+			<p>
+
+				In today's social media age, it's crucial to cut through the noise and take a disciplined approach to managing your finances. This session will guide you through the essential steps for creating a personal grow plan and achieving your long-term goals. Don't miss this opportunity to gain valuable insights and take control of your financial future!
+			</p>
+			<!-- Replace with your image path -->
+		</div>
+		<div class="section services" id="services">
+			<h2>Services We Offer</h2>
+			<br />
+
+			<div>
+				<h3>Economicaly Help And Growth</h3>
+				<p>Personalized financial advice and planning.</p>
+				<ol>
+					<li>* Steps in Personal Financial Planning exercise</li>
+					<li>* Power of Compounding</li>					
+					</ol>
+			</div>
+			<div>
+				<h3>Personal Growth Consulting</h3>
+				<p>Support for small businesses and startups.</p>
+				<ol>					
+					<li>* Follow a Checklist approach</li>
+					<li>* Q & A</li>
+				</ol>
+			</div>
+
+		</div>
+		<!--
+		<div class="section" id="success-stories">
+			<h2>Success Stories</h2>
+			<p>Testimonials from individuals and businesses who have benefited from our services.</p>
+			<img src="success-stories.jpg" alt="Smiling clients">
+		</div>   -->
+	</div>
+	<div class="footer">
+		<div class="section" id="Contact">
+			<h6>Contact Information</h6>
+			<p>Head Office Address:</p>
+			<p>Pro Work's Building,2nd & 3rd Floor, #235, 13th Cross Road, 2nd Stage,Indiranagar,Bangalore-560038</p>
+			
+			<p>
+				Email: support@economichelpandgrowthcenter.com
+
+			</p>
+
+		</div>
+	</div>
+</body>
+</html>
+

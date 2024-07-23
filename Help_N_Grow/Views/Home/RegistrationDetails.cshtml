@@ -1,0 +1,118 @@
+﻿@model Help_N_Grow.Entity.Registration
+
+@{
+	ViewData["Title"] = "Details";
+	Layout = "~/Views/Shared/_Layout.cshtml";
+}
+<h2> Registration Details</h2>
+
+<p>
+	<a asp-action="RegistrationIndex" class="btn btn-primary"> Back to Registration List </a>
+	@*@if (@ViewBag.showCreate)
+		{
+			<a asp-area="" asp-controller="Transaction" class="btn btn-primary" asp-action="Create"> Atd Transaction Detail</a>
+			<span>|</span> <a asp-controller="Transaction" asp-action="Index" class="btn btn-primary">Transaction List</a> <span>|</span><a asp-action="Index" class="btn btn-primary"> Back to Registration List </a>
+
+		}
+		else
+		{
+			<a asp-action="Index" class="btn btn-primary"> Back to Registration List </a>
+			<span>|</span>
+			<a asp-area="" asp-controller="Transaction" asp-action="index" class="btn btn-primary"> View Transaction Detail</a>
+
+		}*@
+</p>
+
+
+<hr />
+
+<div class="form-horizontal" ">
+	<div class="col-md-6">
+		<div class="form-group">
+			<label class="control-label col-sm-4">@Html.DisplayNameFor(model => model.Reg_Id)</label>
+			<div class="col-sm-8">
+				@Html.DisplayFor(model => model.Package_Name)/@Html.DisplayFor(model => model.Parent_Id)/@Html.DisplayFor(model => model.Reg_Id)/@Html.DisplayFor(model => model.Level_Id)
+			</div>
+		</div>
+		<div class="form-group">
+			<label class="control-label col-sm-4">
+				Term's Condition Accepted & IsActive
+			</label>
+			<div class="col-sm-8">
+				@Html.DisplayFor(model => model.Term_Condition_Accepted) & 
+				@Html.DisplayFor(model => model.Is_Active)
+			</div>
+		</div>
+				
+		<div class="form-group">
+			<label class="control-label col-sm-4">@Html.DisplayNameFor(model => model.Full_Name)</label>
+			<div class="col-sm-8">
+				@Html.DisplayFor(model => model.Full_Name)
+			</div>
+		</div>
+
+		<div class="form-group">
+			<label class="control-label col-sm-4">@Html.DisplayNameFor(model => model.Mobile_No)</label>
+			<div class="col-sm-8">
+				@Html.DisplayFor(model => model.Mobile_No)
+			</div>
+		</div>
+		<div class="form-group">
+			<label class="control-label col-sm-4">@Html.DisplayNameFor(model => model.UserName)</label>
+			<div class="col-sm-8">
+				@Html.DisplayFor(model => model.UserName)
+			</div>
+		</div>
+
+
+
+
+
+	</div>
+	<div class="col-md-6">
+		<div class="form-group">
+			<label class="control-label col-sm-4">
+				@Html.DisplayNameFor(model => model.Password)
+			</label>
+			<div class="col-sm-8">
+				@Html.DisplayFor(model => model.Password)
+			</div>
+		</div>
+		<div class="form-group">
+			<label class="control-label col-sm-4">	@Html.DisplayNameFor(model => model.Bank_AC)</label>
+			<div class="col-sm-8">
+				@Html.DisplayFor(model => model.Bank_AC)
+			</div>
+		</div>
+
+		<div class="form-group">
+			<label class="control-label col-sm-4">
+				@Html.DisplayNameFor(model => model.IFSC_Code)
+			</label>
+			<div class="col-sm-8">
+				@Html.DisplayFor(model => model.IFSC_Code)
+			</div>
+		</div>
+		<div class="form-group">
+			<label class="control-label col-sm-4">
+				@Html.DisplayNameFor(model => model.UPI_ID)
+			</label>
+			<div class="col-sm-8">
+				@Html.DisplayFor(model => model.UPI_ID)
+			</div>
+		</div>
+
+		<div class="form-group">
+			<label class="control-label col-sm-4">
+				@Html.DisplayNameFor(model => model.Reg_Date)
+			</label>
+			<div class="col-sm-8">
+				@Html.DisplayFor(model => model.Reg_Date)
+			</div>
+		</div>
+
+
+	</div>
+</div>
+
+<hr />

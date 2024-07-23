@@ -1,0 +1,75 @@
+﻿@model Help_N_Grow.Entity.Registration
+@{
+	ViewData["Title"] = "Term_Condition";
+	Layout = "~/Views/Shared/_Layout.cshtml";
+}
+<style type="text/css">
+	@@font-face {
+		/* Font Name to use*/
+		font-family: 'HindiFont';
+		font-size: large;
+		src: url("/font/k010.TTF")format('truetype');
+	}
+
+	body {
+		font-size: 20px;
+	}
+    body
+    {
+        font-size: 15px;
+    }
+    .hindiFont
+    {
+        /* Assign the font*/
+        font-family: 'HindiFont';
+    }
+</style>
+
+<div class="row">
+	<div class="col-md-9"></div>
+	<div class="col-md-3">
+		<br />
+		Hello @User.Identity.Name
+		<a asp-action="logout" class="btn btn-primary" asp-controller="Home">
+			Logout
+		</a>
+	</div>
+</div>
+<h2>Term & Conditions</h2>
+
+<hr />
+<div class="row">
+
+	<form asp-action="Term_Conditions">
+		<div asp-validation-summary="ModelOnly" class="text-danger"></div>
+		<div class="col-md-12">
+
+			<div class="form-group">
+				<label class="hindiFont">
+					आपण सर्व आमच्या  कंपनीच्या माध्यमातून गरजू व्यक्तींना स्वखुशीने मदत करा आहोत  या मध्ये कंपनीचा कोणताही व्यक्ती कोणासही मदत करणेस दबाव टाकत नाहीत. यामध्ये कंपनीचा मुख्य उद्द्येश
+					हा एक दुसऱ्याचा मदतीने आपण आपला आर्थिक पाय स्वतः भक्कम करणे  हा  असून यामध्ये  कंपनी  फक्त्त सर्व्हिस  फी घेते आणि तेही हा सर्व व्यवहार मदत करण्याचा उद्देशाने पूर्णपणे स्व खुशीने असतो .
+
+				</label>
+			</div>
+		
+		</div>
+
+		<div class="col-md-12">
+
+			<div class="form-group">
+				<label class="control-label"> Please Accept Term & Conditions</label>
+
+				<input asp-for="Term_Condition_Accepted" class="form-control" />
+			</div>
+			<div class="form-group">
+				<input type="submit" value="Procced For Registration " class="btn btn-primary" />
+			</div>
+		</div>
+
+	</form>
+</div>
+
+
+@section Scripts {
+	@{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+}
