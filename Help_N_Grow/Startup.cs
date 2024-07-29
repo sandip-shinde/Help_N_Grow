@@ -51,7 +51,8 @@ namespace Help_N_Grow
 
             services.AddDbContext<HelthPlan_Dbcontext>(conn => conn.UseSqlServer(Configuration.GetConnectionString("connectionstr")));
             services.AddScoped<ILogin, AuthenticateLogin>();
-
+            services.AddDistributedMemoryCache();
+            services.AddSession();
             services.AddCors(options =>
             {
                 options.AddPolicy("AllowAll",
@@ -70,6 +71,7 @@ namespace Help_N_Grow
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
         public void Configure(IApplicationBuilder app, IHostingEnvironment env)
         {
+
             if (env.IsDevelopment())
             {
                 app.UseDeveloperExceptionPage();
@@ -83,6 +85,7 @@ namespace Help_N_Grow
             app.UseHttpsRedirection();
             app.UseStaticFiles();
             app.UseCookiePolicy();
+            app.UseSession();
             app.UseCors("AllowAll");
             app.UseAuthentication();
             app.UseMvc(routes =>

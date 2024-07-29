@@ -2,10 +2,10 @@
 
 @{
 	ViewData["Title"] = "AllMember";
-	Layout = "~/Views/Shared/_AdminLayout.cshtml";
+	Layout =(@User.Identity.Name == "SuperAdmin") ? "~/Views/Shared/_Super_AdminLayout.cshtml" : "~/Views/Shared/_AdminLayout.cshtml";}
 }
 
-<h2>AllMember</h2>
+<h2>All Member</h2>
 
 <hr />
 	<form asp-action="TransactionApprovalAllMemberFilterBy">
@@ -18,9 +18,9 @@
 				</td>
 				<td>
 					<select name="FilterBy" id="FilterBy">
-						<option value="1">Your ID</option>
+						<option value="1">Member ID</option>
 						<option value="2">Head ID</option>
-						<option value="3">Name</option>
+						<option value="3">Member Name</option>
 						<option value="4">Mobile Number</option>
 						<option value="5">Level</option>
 					</select>
@@ -58,52 +58,52 @@
 			</th>
 
 			
-			<th></th>
+			<th>@Html.DisplayNameFor(model => model.Is_Approved)</th>
 		</tr>
 	</thead>
 	<tbody>
 		@foreach (var item in Model)
 		{
-			<tr>
-				<td>
-					@Html.DisplayFor(modelItem => item.Unique_No)
-				</td>
-				<td>
-					@Html.DisplayFor(modelItem => item.Full_Name)
-				</td>
-				<td>
-					@Html.DisplayFor(modelItem => item.Mobile_No)
-				</td>
-				@*<td>
-					@Html.DisplayFor(modelItem => item.Transaction_Date)
-				</td>
-				<td>
-					@Html.DisplayFor(modelItem => item.Transaction_ID)
-				</td>*@
+		<tr>
+			<td>
+				@Html.DisplayFor(modelItem => item.Unique_No)
+			</td>
+			<td>
+				@Html.DisplayFor(modelItem => item.Full_Name)
+			</td>
+			<td>
+				@Html.DisplayFor(modelItem => item.Mobile_No)
+			</td>
+			@*<td>
+			@Html.DisplayFor(modelItem => item.Transaction_Date)
+		</td>
+		<td>
+			@Html.DisplayFor(modelItem => item.Transaction_ID)
+		</td>*@
 
-				<td>
-					@Html.DisplayFor(modelItem => item.Username)
-				</td>
-				<td>
-					@Html.DisplayFor(modelItem => item.Password)
-				</td>
+			<td>
+				@Html.DisplayFor(modelItem => item.Username)
+			</td>
+			<td>
+				@Html.DisplayFor(modelItem => item.Password)
+			</td>
 
-				@*<td>
-					@Html.DisplayFor(modelItem => item.Reg_Id)
-				</td>
-				<td>
-					@Html.DisplayFor(modelItem => item.Level_Id)
-				</td>
-				<td>
-					@Html.DisplayFor(modelItem => item.Parent_Id)
-				</td>*@
+			<td>
+				@Html.DisplayFor(modelItem => item.Is_Approved)
+			</td>
+			@*<td>
+			@Html.DisplayFor(modelItem => item.Level_Id)
+		</td>
+		<td>
+			@Html.DisplayFor(modelItem => item.Parent_Id)
+		</td>*@
 
-				@*<td>
-						@Html.ActionLink("Edit", "Edit", new { /* id=item.PrimaryKey */ }) |
-						@Html.ActionLink("Details", "Details", new { /* id=item.PrimaryKey */ }) |
-						@Html.ActionLink("Delete", "Delete", new { /* id=item.PrimaryKey */ })
-					</td>*@
-			</tr>
+			@*<td>
+			@Html.ActionLink("Edit", "Edit", new { /* id=item.PrimaryKey */ }) |
+			@Html.ActionLink("Details", "Details", new { /* id=item.PrimaryKey */ }) |
+			@Html.ActionLink("Delete", "Delete", new { /* id=item.PrimaryKey */ })
+		</td>*@
+		</tr>
 		}
 	</tbody>
 </table>

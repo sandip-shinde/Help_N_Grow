@@ -29,6 +29,75 @@ namespace Help_N_Grow.Controllers
             _context = context;
             _loginUser = loguser;
         }
+
+        #region AdminLogin
+        public IActionResult AdminIndex()
+        {
+            AdminLogout();
+            return View();
+        }
+
+        [HttpPost]
+        public IActionResult AdminIndex(string username, string passcode, string role)
+        {
+            try
+            {
+                if (string.IsNullOrEmpty(passcode) || string.IsNullOrEmpty(username) || string.IsNullOrEmpty(role))
+                {
+                    return RedirectToAction("AdminIndex", "Home");
+                }
+                else
+                {
+
+
+                    var issuccess = _loginUser.AuthenticateUser(username, passcode, role);
+
+                    if (issuccess.Result?.Full_Name != null)
+                    {
+                        ViewBag.username = string.Format("Successfully logged-in", issuccess.Result?.Full_Name);
+                        TempData["Package_ID"] = issuccess.Result.Package_ID;
+                        TempData["Package_Name"] = issuccess.Result.Package_Name;
+                        TempData["Level_Id"] = issuccess.Result.Level_Id;
+                        TempData["Parent_Id"] = issuccess.Result.Reg_Id;
+                        TempData["username"] = issuccess.Result.UserName;
+                        //Create the identity for the user  
+                        var identity = new ClaimsIdentity(new[] {
+                    new Claim(ClaimTypes.Name, username)
+                }, CookieAuthenticationDefaults.AuthenticationScheme);
+
+                        var principal = new ClaimsPrincipal(identity);
+
+                        var login = HttpContext.SignInAsync(CookieAuthenticationDefaults.AuthenticationScheme, principal);
+                                               
+                        if (role == "Admin")
+                            return RedirectToAction("AllMember");
+                        if (role == "Super_Admin")
+                            return RedirectToAction("TransactionApprovalIndex");
+                        return View();
+                    }
+                    else
+                    {
+                        ViewBag.username = string.Format("Please check Username and Password ", username);
+                        return View();
+                    }
+                }
+            }
+            catch (Exception ex)
+            {
+                throw ex.InnerException;
+
+            }
+        }
+
+        [HttpGet]
+        public IActionResult AdminLogout()
+        {
+            var login = HttpContext.SignOutAsync(CookieAuthenticationDefaults.AuthenticationScheme);
+            return RedirectToAction("AdminIndex");
+        }
+
+        #endregion 
+
         #region MainLogin
 
         public IActionResult Main()
@@ -70,7 +139,7 @@ namespace Help_N_Grow.Controllers
                 }, CookieAuthenticationDefaults.AuthenticationScheme);
 
                         var principal = new ClaimsPrincipal(identity);
-
+                        
                         var login = HttpContext.SignInAsync(CookieAuthenticationDefaults.AuthenticationScheme, principal);
                         var level = _context.Level.Where(a => a.Level_Id == issuccess.Result.Level_Id && a.Package_ID == issuccess.Result.Package_ID).FirstOrDefault();
 
@@ -80,11 +149,7 @@ namespace Help_N_Grow.Controllers
                             ViewBag.MemberAmount = level.Amount;
                             Level_Upgrade(issuccess.Result.Reg_Id, issuccess.Result.Level_Id, issuccess.Result.Package_ID);
                             return View("Dashboard",level);
-                        }
-                        if (role == "Admin")
-                            return RedirectToAction("AllMember");
-                        if (role == "Super_Admin")
-                            return RedirectToAction("TransactionApprovalIndex");
+                        }                       
                         return View();
                     }
                     else
@@ -100,6 +165,7 @@ namespace Help_N_Grow.Controllers
 
             }
         }
+
         [HttpGet]
         public IActionResult Logout()
         {
@@ -130,8 +196,7 @@ namespace Help_N_Grow.Controllers
         }
 
         #endregion
-
-
+        
         #region Level
         [Authorize]
         // GET: Levels
@@ -287,7 +352,10 @@ namespace Help_N_Grow.Controllers
             int Level_Id = Convert.ToInt32(TempData.Peek("Level_Id"));
 
             var Parent = await _context.Registration.Where(e => e.Reg_Id == Parent_Id).FirstOrDefaultAsync();
-
+            if(Package_ID==0|| Parent_Id==0|| Level_Id==0)
+            {
+                return View("Error",new ErrorViewModel { RequestId = Activity.Current?.Id ?? HttpContext.TraceIdentifier });
+            }
             var registration = await _context.Registration.Where(e => e.Parent_Id == Parent_Id && e.Level_Id == Level_Id).ToListAsync();
             var transaction = await _context.TblTransaction.Where(e => e.Parent_Id == Parent_Id && e.Level_Id == Level_Id).ToListAsync();
             Level_Upgrade(Parent_Id, Level_Id, Package_ID);
@@ -324,7 +392,7 @@ namespace Help_N_Grow.Controllers
                     string unique_Id = item.Package_Name + "/" + item.Parent_Id + "/" + item.Reg_Id + "/" + item.Level_Id;
                     OldMember oldmember = new OldMember();
                     oldmember.Unique_No = unique_Id;
-                    oldmember.Member_Name = item.Full_Name;
+                    oldmember.Member_Name = item?.Full_Name;
                     oldmember.Member_Id = item.Reg_Id;
                     oldmemberList.Add(oldmember);
                 }
@@ -1288,6 +1356,7 @@ namespace Help_N_Grow.Controllers
                 ViewBag.UpgradedMessage = "Congratulations !!! you have completed the level and Pramoted to Next Level :)";
         }
         #endregion
+
         #region TransactionApproval
         // GET: TransactionApproval
         [Authorize]
@@ -1498,6 +1567,7 @@ namespace Help_N_Grow.Controllers
             return _context.TblTransaction.Any(e => e.Transaction_ID == id);
         }
         #endregion
+
         #region UpgradeToNextStep
 
         //Upgrade To Next Package
@@ -1538,24 +1608,53 @@ namespace Help_N_Grow.Controllers
         {
 
             AdminReportsVM adminReportsVM = new AdminReportsVM();
-            List<AdminReports> BypackageTotalReport = await _context.TblTransaction.Select(k => new { k.Package_Name, k.Company_Percentage }).GroupBy(x => new { x.Package_Name }, (key, group) => new
-          AdminReports
+
+            //Package
+            var BypackageTotalReport = await _context.TblTransaction.FromSql("select r.package_Name, isnull(sum(Company_Percentage),0) as Company_Percentage from [dbo].[Registration] r left outer join [dbo].[TblTransaction] t on r.[Reg_Id] = t.[Reg_Id] where r.[Package_ID]!=1 group by r.package_Name").ToListAsync();
+            
+            List<AdminReports> BypackageAdminReportList = new List<AdminReports>();
+            foreach (var record in BypackageTotalReport)
             {
-                package_Name = key.Package_Name,
-                Amount = group.Sum(k => k.Company_Percentage)
-            }).ToListAsync();
+                BypackageAdminReportList.Add(new AdminReports
+                {
+                    package_Name = record.Package_Name,
+                    Amount = record.Company_Percentage
+                });
+            }
 
-            List<AdminReports> BypackageandlevelReport = await _context.TblTransaction.Select(k => new { k.Package_Name, k.Level_Id, k.Company_Percentage }).GroupBy(x => new { x.Package_Name, x.Level_Id }, (key, group) => new
-            AdminReports
+            //package and level
+            var BypackageandlevelReport = await _context.TblTransaction.FromSql("select r.package_Name as Package_Name,r.Level_Id as Level_Id,isnull(sum(Company_Percentage),0) as Company_Percentage from [dbo].[Registration] r left outer join [dbo].[TblTransaction] t on r.[Reg_Id] = t.[Reg_Id] where r.[Package_ID]!=1 group by r.package_Name,r.Level_Id order by amount desc").ToListAsync();
+               
+            List<AdminReports> Bypackageandlevel_AdminReportList = new List<AdminReports>();
+            foreach (var record in BypackageandlevelReport)
             {
-                package_Name = key.Package_Name,
-                Level = key.Level_Id,
-                Amount = group.Sum(k => k.Company_Percentage)
-            }).ToListAsync();
+                Bypackageandlevel_AdminReportList.Add(new AdminReports
+                {
+                    package_Name = record.Package_Name,
+                    Level=record.Level_Id,
+                    Amount = record.Company_Percentage
+                });
+            }
 
+            //package, level and Member
+            //var BypackageandlevelandMemberReport = await _context.TblTransaction.FromSql("select r.package_Name as package_Name, r.Level_Id as Level_Id, r.Full_Name as Transaction_No, isnull(sum(Company_Percentage), 0) as Company_Percentage from[dbo].[Registration] r left outer join[dbo].[TblTransaction] t on r.[Reg_Id] = t.parent_id where r.[Package_ID] != 1 group by r.package_Name, r.Level_Id, r.Full_Name order by amount desc").ToListAsync();
 
-            adminReportsVM.Bypackage_Report = BypackageTotalReport;
-            adminReportsVM.BypackageAndLevel_Report = BypackageandlevelReport;
+            //List<AdminReports> BypackageandlevelAndMember_AdminReportList = new List<AdminReports>();
+            //foreach (var record in BypackageandlevelandMemberReport)
+            //{
+            //    BypackageandlevelAndMember_AdminReportList.Add(new AdminReports
+            //    {
+            //        package_Name = record.Package_Name,
+            //        Level = record.Level_Id,
+            //        Full_Name=record.Transaction_No,
+            //        Amount = record.Company_Percentage
+            //    });
+            //}
+
+            adminReportsVM.Bypackage_Report = BypackageAdminReportList;
+            adminReportsVM.BypackageAndLevel_Report = Bypackageandlevel_AdminReportList;
+            //adminReportsVM.BypackageLevelAndMember_Report = BypackageandlevelAndMember_AdminReportList;
+
             return adminReportsVM;
         }
         #endregion

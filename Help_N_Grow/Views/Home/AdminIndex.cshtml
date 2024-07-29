@@ -1,6 +1,10 @@
-﻿@{
-	ViewBag.Title = "Economic Help and Growth Center";
+﻿
+@{
+	ViewData["Title"] = "AdminIndex";
 }
+
+<h2>Admin Panel</h2>
+
 
 <style>
 	/*style.css*/
@@ -90,7 +94,7 @@
 <head>
 	<meta charset="UTF-8">
 	<meta name="viewport" content="width=device-width, initial-scale=1.0">
-	<title>Economic Help and Growth Center</title>
+	<title>Admin Panel</title>
 	<style>
 		body {
 			font-family: Arial, sans-serif;
@@ -197,18 +201,15 @@
 <body>
 	<header>
 		<img src="~/Logo_Img/Economic_Help_Logo.JPG" alt="Economic Help and Growth Center Logo"> <!-- Replace with your logo path -->
-		<h3>  Economic Help and Growth Center </h3>
-		<nav style="justify-content: space-between;padding-left: 30%;">
-			<a href="/home/main">Home</a>
-		</nav>
+		<h3>  Economic Help and Growth Center </h3>		
 	</header>
 	<div class="main">
 		@*<h1>Economic Help and Growth Center</h1>*@
-		<h3>Login</h3>
+		<h3>Admin Panel Login</h3>
 		<div style="color:red">
 			@ViewBag.username
 		</div>
-		<form asp-action="Index">
+		<form asp-action="AdminIndex">
 			<label for="username">
 				Username:
 			</label>
@@ -228,8 +229,8 @@
 				Select Role:
 			</label>
 			<select name="role" id="role">
-				<option value="Member">Member</option>
-				<option value="User">User</option>
+				<option value="Admin">Admin</option>
+				<option value="Super_Admin">Super_Admin</option>
 			</select>
 
 			<div class="wrap">
