@@ -30,7 +30,7 @@
 
 	</div>
 </div>
-<h2>Member List</h2>
+<h2>Registration List</h2>
 
 
 
@@ -40,7 +40,7 @@
 	<p>
 		@if (Model.showCreate == "true")
 		{
-			<a asp-action="RegistrationCreate" class="btn btn-primary">Register New Member</a>
+			<a asp-action="RegistrationCreate" class="btn btn-default">Register New Joinee</a>
 		}
 		@if (Model.showCreate == "Pending")
 		{
@@ -65,12 +65,12 @@ else
 				<table class="table">
 					<tr><td colspan="5"><b style="color:red">   </b></td></tr>
 					<tr>
-						<td><a asp-action="RegistrationCreate" class="btn btn-primary">Register New Member</a></td>
+						<td><a asp-action="RegistrationCreate" class="btn btn-default">Register New Joinee</a></td>
 
 						<td>
 							<div class="wrap">
-								<button type="button" class="btn btn-primary" onclick="ShowHide()">
-									View Old Member
+								<button type="button" class="btn btn-default" onclick="ShowHide()">
+									View Old Joinee
 								</button>
 							</div>
 						</td>
@@ -78,7 +78,7 @@ else
 				</table>
 				<form asp-action="RegistrationOld">
 					<table id="tblOldMember" style="display:none">
-						<thead style="background-color:#d3d7da !important"><tr><th>Member ID</th><th>Full Name</th><th></th></tr></thead>
+						<thead style="background-color:#d3d7da !important"><tr><th> ID</th><th>Full Name</th><th></th></tr></thead>
 						@foreach (var member in Model.oldMemberLst)
 						{
 							<tr>
@@ -87,7 +87,7 @@ else
 								<td>
 									<input type="text" id="MemberID" name="MemberID" style="display:none" value="@member.Member_Id" />
 
-									<button type="submit" class="btn btn-info">Add Old Member</button>
+									<button type="submit" class="btn btn-info">Add Old Registration</button>
 								</td>
 							</tr>
 
@@ -111,7 +111,8 @@ else
 <table class="table" id="Membertbl">
 	<thead>
 		<tr>
-			<th>Download Membership</th>
+			<th>Download </th>
+			<th>Self Copy</th>
 			<th>
 
 				Is_Approved
@@ -127,20 +128,20 @@ else
 				Mobile_No
 			</th>
 			@*	<th>
-					@Html.DisplayNameFor(model => model.Registrationobj.Bank_AC)
-				</th>
-				<th>
-					@Html.DisplayNameFor(model => model.Registrationobj.IFSC_Code)
-				</th>
-				<th>
-					@Html.DisplayNameFor(model => model.Registrationobj.UPI_ID)
-				</th>
-				<th>
-					@Html.DisplayNameFor(model => model.Registrationobj.Term_Condition_Accepted)
-				</th>
-					<th>
-						@Html.DisplayNameFor(model => model.Registrationobj.Reg_Date)
-					</th>*@
+			@Html.DisplayNameFor(model => model.Registrationobj.Bank_AC)
+		</th>
+		<th>
+			@Html.DisplayNameFor(model => model.Registrationobj.IFSC_Code)
+		</th>
+		<th>
+			@Html.DisplayNameFor(model => model.Registrationobj.UPI_ID)
+		</th>
+		<th>
+			@Html.DisplayNameFor(model => model.Registrationobj.Term_Condition_Accepted)
+		</th>
+			<th>
+				@Html.DisplayNameFor(model => model.Registrationobj.Reg_Date)
+			</th>*@
 			<th>
 
 				Level_Id
@@ -162,7 +163,9 @@ else
 			<tr>
 				<td>
 					<a asp-action="downloadmembershipSlip" style="display:@Is_Approved" asp-route-id="@item.Registrationobj.Reg_Id" class="btn btn-primary">Registration Slip</a>
-				</td>
+				</td><td>
+	<a asp-action="downloadmembershipSlipSelf" style="display:@Is_Approved" asp-route-id="@item.Registrationobj.Reg_Id" class="btn btn-primary">Self Slip</a>
+</td>
 				<td style="@style">
 					@Html.DisplayFor(modelItem => item.Is_Approved)
 				</td>
@@ -218,9 +221,9 @@ else
 		}
 	</tbody>
 </table>
-@if (Model.RegistrationoVMLst.Count != 0)
+@*@if (Model.RegistrationoVMLst.Count >= 0)
 {
 <p>
-	<a asp-action="downloadAllmembershipSlip" asp-route-id="@Model.registration.Reg_Id" class="btn btn-primary">Download My All Member List</a>
+	<a asp-action="downloadAllmembershipSlip" asp-route-id="@Model.registration.Reg_Id" class="btn btn-primary">Download My All List</a>
 </p>
-}
+}*@

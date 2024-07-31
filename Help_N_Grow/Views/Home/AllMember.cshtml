@@ -5,7 +5,7 @@
 	Layout =(@User.Identity.Name == "SuperAdmin") ? "~/Views/Shared/_Super_AdminLayout.cshtml" : "~/Views/Shared/_AdminLayout.cshtml";}
 }
 
-<h2>All Member</h2>
+<h2>All Associate List</h2>
 
 <hr />
 	<form asp-action="TransactionApprovalAllMemberFilterBy">
@@ -18,9 +18,9 @@
 				</td>
 				<td>
 					<select name="FilterBy" id="FilterBy">
-						<option value="1">Member ID</option>
+						<option value="1">Your ID</option>
 						<option value="2">Head ID</option>
-						<option value="3">Member Name</option>
+						<option value="3">Your Name</option>
 						<option value="4">Mobile Number</option>
 						<option value="5">Level</option>
 					</select>

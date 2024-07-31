@@ -428,22 +428,23 @@ namespace Help_N_Grow.Controllers
                 htmlContent += "<div style = 'margin-bottom: 5px; text-align: center;'>";
                 htmlContent += "<img src = '.\\wwwroot\\Logo_Img\\Economic_Help_Logo.JPG' alt = 'Logo' style = 'max-width: 100px; margin-bottom: 10px;' > </div>";
                 htmlContent += " <div style = 'margin-bottom: 5px; text-align: center;'>";
-                htmlContent += " <h4> CERTIFICATE OF REGISTRATION </h4> </div> ";
+                htmlContent += " <h4> REGISTRATION </h4> </div> ";
                 htmlContent += " <p style = 'margin: 0;' >Sr.No: " + registration.Package_Name + "/" + registration.Parent_Id + "/" + registration.Reg_Id + "/" + registration.Level_Id + "</p> ";
                 htmlContent += " <p style = 'margin: 0;' >Date: " + System.DateTime.Now.ToShortDateString() + "</p> ";
                 htmlContent += " <p style = 'margin: 0;' >---------------------------------------------------------</p>";
                 htmlContent += " <p style = 'margin: 0;' > Dear " + registration.Full_Name + "</p> ";
                 htmlContent += " <p style = 'margin: 0;' > Mobile: " + registration.Mobile_No + "</p>  <br>";
                 htmlContent += "  <p style = 'margin: 5px;' >Salutation,</p> ";
-                htmlContent += " <p style = 'margin: 10px;' > Thank you for your membership with us. your contribution is valuable and it helps our mission.</p>";
+                htmlContent += " <p style = 'margin: 10px;' > Thank you for your Registration with us. your contribution is valuable and it helps our mission.</p>";
                 htmlContent += " <p>your registration is as:  User Name: " + registration.UserName + " and Password: " + registration.Password + "</p> ";
                 htmlContent += " <p style = 'margin: 0;' >--------------------------------------------------------</p>";
                 htmlContent += " <p><i> Thank you again for your ongoing support of our mission.</i></p><p style = 'margin:5px;'><b>Sincerely.</b></p>";
-                htmlContent += " <p><b>Economic Help and Growth Center</b></p>";
-                htmlContent += " <p>Membership Status : <b>" + Status + "</b></p>";
-                htmlContent += " <p>Note :  Membership is only considered after status approved</p>";
+                htmlContent += " <p><b>Economic Help and Growth Center      </b></p>";
+                htmlContent += " <p>Registration Status : <b>" + Status + "</b></p>";
+                htmlContent += "<h6> <p>Note :  Your joining is only considered after status approved</p>";
+                htmlContent += " <div>       2) Registration & Help amount is not refundable.</div></h6>";
                 htmlContent += "</div>";
-                PdfGenerator.AddPdfPages(data, htmlContent, PageSize.A5);
+                PdfGenerator.AddPdfPages(data, htmlContent, PageSize.A4);
                 byte[] response = null;
                 using (MemoryStream ms = new MemoryStream())
                 {
@@ -480,43 +481,52 @@ namespace Help_N_Grow.Controllers
 
                 var data = new PdfDocument();
                 string htmlContent = "<div style = 'margin: 5px auto; heigth:300px; max-width: 200px; padding: 10px; border: 1px solid #ccc; background-color: #FFFFFF; font-family: Arial, sans-serif;' >";
-                htmlContent += "<div style = 'margin-bottom: 5px; text-align: center;'>";
-                htmlContent += "<img src = '.\\wwwroot\\Logo_Img\\Economic_Help_Logo.JPG' alt = 'Logo' style = 'max-width: 100px; margin-bottom: 10px;' > </div>";
-                htmlContent += " <div style = 'margin-bottom: 5px; text-align: center;'>";
-                htmlContent += " <h4> MEMBER REGISTRATION </h4> </div> ";
-                htmlContent += " <p style = 'margin: 0;' >Sr.No: " + registration.Package_Name + "/" + registration.Parent_Id + "/" + registration.Reg_Id + "/" + registration.Level_Id + "                                      Date: " + System.DateTime.Now.ToShortDateString() + "</p> ";
-                htmlContent += " <p style = 'margin: 0;' >****************************************************************************</p> ";
-                htmlContent += " <p style = 'margin: 0;' >-------------------------Member Details------------------------------</p>";
-                htmlContent += " <p style = 'margin: 0;' > Reference Transaction No: ---------------------------------------</p>   <br>";
-                htmlContent += " <p style = 'margin: 0;' > Full_Name: ---------------------------------Mobile: ----------------------</p> ";
-                htmlContent += " <p style = 'margin: 0;' > Your Bank A/c No: --------------------------- IFSC Code: ---------------</p> ";
-                htmlContent += " <p style = 'margin: 0;' >Phone pay/G pay UPI ID: -------------------------------------</p> ";
-                htmlContent += " <p style = 'margin: 0;' > Reason for help: ----------------------------------------------</p>  <br>";
-                htmlContent += " <p style = 'margin: 0;' >--------------------------Reference Details----------------------------</p>";
-                htmlContent += " <table><tr><td><div>  ";
-                htmlContent += " <p style = 'margin: 0;' > Company Transaction No: --------------------------------------</p> ";
-                htmlContent += " <p style = 'margin: 0;' >Bank Name: " + registration.Mobile_No + "---------------------</p>";
-                htmlContent += " <p style = 'margin: 0;' >Bank A/c No: " + registration?.Bank_AC + " IFSC Code: " + registration?.IFSC_Code + "---------------------</p>";
-                htmlContent += " <p style = 'margin: 0;' >Phone pay/G pay UPI ID: " + registration?.UPI_ID + "-----------------</p>  <br> ";
+                htmlContent += "<div style = 'text-align: center;'>";
+                htmlContent += "<img src = '.\\wwwroot\\Logo_Img\\Economic_Help_Logo.JPG' alt = 'Logo' style = 'max-width: 100px; margin-bottom: 5px;' > </div>";
+                htmlContent += " <div style = 'margin-bottom: 3px; text-align: center;'>";
+                htmlContent += " <h4> JOINING REGISTRATION </h4> </div> ";
+                htmlContent += " <p style = 'margin: 0;' >Sr.No: " + registration.Package_Name + "/" + registration.Parent_Id + "/" + registration.Reg_Id + "/" + registration.Level_Id + "--------------------------- Date: " + System.DateTime.Now.ToShortDateString() + "</p> ";
+                htmlContent += " <p>Ref. Status : <b>" + Status + "</b></p>";
+                htmlContent += " <p style = 'margin: 0;' >*************************************************************************</p> ";
+                htmlContent += " <div style = 'margin: 0;' ><b>Ref. Details</b>-------------------------------------------------------</div>";
+                //htmlContent += " <div style = 'margin: 0;' > Reference Transaction No: ---------------------------------------</div>   <br>";
+                htmlContent += " <div style = 'margin: 0;' > Full_Name: ---------------------------------Mobile: ----------------------</div> ";
+                htmlContent += " <div style = 'margin: 0;' > Your Bank A/c No: --------------------------- IFSC Code: ---------------</div> ";
+                htmlContent += " <div style = 'margin: 0;' >Phone pay/G pay UPI ID: -------------------------------------</div> ";
+                htmlContent += " <div style = 'margin: 0;' >User Name: ------------------Password : ----------------</div> ";
+                htmlContent += " <div style = 'margin: 0;' > Reason for help: ----------------------------------------------</div>  <br>";
+                htmlContent += "</div> <div> <table style = 'border-collapse: collapse;'><tr><td><div>  ";
+                //htmlContent += " <div style = 'margin: 0;' >--------------------------Other Details----------------------------</div>";
+                htmlContent += " Branch A/c Details</div></td><td><div> ";
+                htmlContent += " Help A/c Details</div></td></tr>";
+                htmlContent += "<tr><td><div>  ";
+                htmlContent += " <div style = 'margin: 0;' > Company Transaction No: ------------- -----------  -----------</div> ";
+                //htmlContent += " <div style = 'margin: 0;' >Bank Name:--- " + registration.Mobile_No + "---</div>";
+                //htmlContent += " <div style = 'margin: 0;' >Bank A/c No: ---" + registration?.Bank_AC + " IFSC Code:---- " + registration?.IFSC_Code + "---</div>";
+                htmlContent += " <div style = 'margin: 0;' >Phone pay/G pay UPI ID:--- " + registration?.UPI_ID + "---</div>  <br> ";
                 htmlContent += " </div></td><td><div> ";
-                htmlContent += " <p>Ref. Membership Status : <b>" + Status + "</b></p>";
-                htmlContent += " <p style = 'margin: 0;' > Name: " + registration.Full_Name + "  Mobile: " + registration.Mobile_No + "---------------------</p>";
-                htmlContent += " <p style = 'margin: 0;' > Your Bank A/c No: " + registration?.Bank_AC + " IFSC Code: " + registration?.IFSC_Code + "---------------------</p>";
-                htmlContent += " <p style = 'margin: 0;' >Phone pay/G pay UPI ID: " + registration?.UPI_ID + "-----------------</p>  <br> ";
+
+                htmlContent += " <div style = 'margin: 0;' > REf. Trans.No: ------------- --------- --------</div> ";
+                //htmlContent += " <div style = 'margin: 0;' > Name: ---" + registration.Full_Name + "  Mobile: " + registration.Mobile_No + "---------------------</div>";
+               // htmlContent += " <div style = 'margin: 0;' > Help Bank A/c No: ---" + registration?.Bank_AC + " IFSC Code:--- " + registration?.IFSC_Code + "---</div>";
+                htmlContent += " <div style = 'margin: 0;' >Help Phone pay/G pay UPI ID: ---" + registration?.UPI_ID + "---</div>  <br> ";
+                htmlContent += " </div></td></tr><tr><td colspan='2'><div> ";
+
+                htmlContent += " <div style = 'margin: 10px;' > Thank you for joining with us. your contribution is valuable and it helps our mission.</div>";
+                htmlContent += "<h6> <div>Note : 1) Joining is only considered after status approved.</div>";
+                htmlContent += " <div>       2) Registration & Help amount is not refundable.</div></h6>";
+                htmlContent += " <div>        Signature.</div>";
                 htmlContent += " </div></td></tr><table>";
-                htmlContent += " <p style = 'margin: 10px;' > Thank you for your membership with us. your contribution is valuable and it helps our mission.</p>";
-                htmlContent += " <p style = 'margin: 0;' >--------------------------------------------------------------------</p>";
-                htmlContent += " <p>Note : 1) Membership is only considered after status approved.</p>";
-                htmlContent += " <p>       2) Registration amount is not refundable.</p>";
-                htmlContent += "</div>";
-                PdfGenerator.AddPdfPages(data, htmlContent, PageSize.A5);
+               
+                htmlContent += "</div></div>";
+                PdfGenerator.AddPdfPages(data, htmlContent, PageSize.A4);
                 byte[] response = null;
                 using (MemoryStream ms = new MemoryStream())
                 {
                     data.Save(ms);
                     response = ms.ToArray();
                 }
-                string fileName = "Member_" + registration.Parent_Id + "_" + registration.Reg_Id + "_ " + registration.Level_Id + ".pdf";
+                string fileName = "Membership_Form_" + registration.Parent_Id + "_" + registration.Reg_Id + "_ " + registration.Level_Id + ".pdf";
                 return File(response, "application/pdf", fileName);
             }
             catch (Exception ex)
@@ -549,14 +559,14 @@ namespace Help_N_Grow.Controllers
                 htmlContent += "<div style = 'margin-bottom: 5px; text-align: center;'>";
                 htmlContent += "<img src = '.\\wwwroot\\Logo_Img\\Economic_Help_Logo.JPG' alt = 'Logo' style = 'max-width: 100px; margin-bottom: 10px;' > </div>";
                 htmlContent += " <div style = 'margin-bottom: 5px; text-align: center;'>";
-                htmlContent += " <h4> CERTIFICATE OF GROUP MEMBER </h4> </div> ";
+                htmlContent += " <h4> GROUP REGISTRATION </h4> </div> ";
                 htmlContent += " <p style = 'margin: 0;' >Sr.No: " + registration.Package_Name + "/" + registration.Parent_Id + "/" + registration.Reg_Id + "/" + registration.Level_Id + "</p> ";
                 htmlContent += " <p style = 'margin: 0;' >Date: " + System.DateTime.Now.ToShortDateString() + "</p> ";
                 htmlContent += " <p style = 'margin: 0;' >---------------------------------------------------------</p>";
                 htmlContent += " <p style = 'margin: 0;' > Dear " + registration.Full_Name + "</p> ";
                 htmlContent += " <p style = 'margin: 0;' > Mobile: " + registration.Mobile_No + "</p>  <br>";
-                htmlContent += "  <p style = 'margin: 5px;' >Salutation,</p> ";
-                htmlContent += " <p style = 'margin: 10px;' > Thank you for your membership with us. your contribution is valuable and it helps our mission.</p>";
+                htmlContent += "  <p style = 'margin:0;' >Salutation,</p> ";
+                htmlContent += " <p style = 'margin: 1px;' > Thank you for joining with us. your contribution is valuable and it helps our mission.</p>";
                 htmlContent += " <p>your registration is as:  User Name: " + registration.UserName + " and Password: " + registration.Password + "</p> ";
                 htmlContent += " <p style = 'margin: 0;' >--------------------------------------------------------</p>";
 
@@ -571,7 +581,8 @@ namespace Help_N_Grow.Controllers
                 htmlContent += " <p><i> Thank you again for your ongoing support of our mission.</i></p><p style = 'margin:5px;'><b>Sincerely.</b></p>";
                 htmlContent += " <p><b>Economic Help and Growth Center</b></p>";
                 htmlContent += " <p>Membership Status : <b>" + Status + "</b></p>";
-                htmlContent += " <p>Note :  Membership is only considered after status approved</p>";
+                htmlContent += "<h6> <p>Note :  Your joining is only considered after status approved</p>";
+                htmlContent += " <div>      Registration & Help amount is not refundable.</div></h6>";
                 htmlContent += "</div>";
                 PdfGenerator.AddPdfPages(data, htmlContent, PageSize.A4);
                 byte[] response = null;
@@ -580,7 +591,7 @@ namespace Help_N_Grow.Controllers
                     data.Save(ms);
                     response = ms.ToArray();
                 }
-                string fileName = "Member_" + registration.Parent_Id + "_" + registration.Reg_Id + "_ " + registration.Level_Id + ".pdf";
+                string fileName = "Member_registration_" + registration.Parent_Id + "_" + registration.Reg_Id + "_ " + registration.Level_Id + ".pdf";
                 return File(response, "application/pdf", fileName);
             }
             catch (Exception ex)
