@@ -25,7 +25,13 @@ namespace Help_N_Grow.Entity
                 entity.HasKey(k => k.Reg_Id);
             });
         }
-        public DbSet<Help_N_Grow.Entity.Level> Level { get; set; }
-        public DbSet<Help_N_Grow.Entity.TblTransaction> TblTransaction { get; set; }
+        public DbSet<Level> Level { get; set; }
+        public DbSet<TblTransaction> TblTransaction { get; set; }
+        //public DbSet<TblTransactionVM> TblTransactionVM { get; set; }
+       // public DbSet<AdminReportsVM> AdminReportsVM { get; set; }
+        public DbSet<Adminpackage_NameReports> Adminpackage_NameReports { get; set; }
+        public DbSet<Adminpackage_Name_Level_Reports> Adminpackage_Name_Level_Reports { get; set; }
+        public DbSet<Adminpackage_Name_Level_Name_Reports> Adminpackage_Name_Level_Name_Reports { get; set; }
+
     }
 }

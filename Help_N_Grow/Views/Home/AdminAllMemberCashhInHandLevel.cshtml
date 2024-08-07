@@ -21,7 +21,7 @@
 				</tr>
 			</thead>
 			<tbody>
-				@foreach (var item in Model.Bypackage_Report)
+				@foreach (var item in Model.Adminpackage_NameReports)
 				{
 					<tr>
 						<td>
@@ -56,7 +56,7 @@
 				</tr>
 			</thead>
 			<tbody>
-				@foreach (var item in Model.BypackageAndLevel_Report)
+				@foreach (var item in Model.Adminpackage_Name_Level_Reports)
 				{
 					<tr>
 						<td>
@@ -79,3 +79,51 @@
 	</div>
 </div>
 <hr />
+
+<div class="row">
+	<div class="col-md-6">
+
+
+		<table class="table">
+			<thead>
+				<tr>
+					<th>
+						Package Name
+					</th><th>
+	Level
+</th><th>
+	Full_Name
+</th>
+					<th>
+						Amount
+					</th>
+				</tr>
+			</thead>
+			<tbody>
+				@foreach (var item in Model.Adminpackage_Name_Level_Name_Reports)
+				{
+					<tr>
+						<td>
+							@Html.DisplayFor(modelItem => item.package_Name)
+						</td><td>
+	@Html.DisplayFor(modelItem => item.Level)
+</td><td>
+	@Html.DisplayFor(modelItem => item.Full_Name)
+</td>
+						<td>
+							@Html.DisplayFor(modelItem => item.Amount)
+						</td>
+					</tr>
+				}
+			</tbody>
+		</table>
+
+
+	</div>
+	<div class="col-md-6">
+
+
+
+
+	</div>
+</div>

@@ -15,7 +15,7 @@
   <ItemGroup>
     <None Include="Views\Account\Index.cshtml" />
     <None Include="Views\Home\About.cshtml" />
-    <None Include="Views\Home\AdminReports.cshtml" />
+    <None Include="Views\Home\AdminAllMemberCashhInHandLevel.cshtml" />
     <None Include="Views\Home\Contact.cshtml" />
     <None Include="Views\Home\Dashboard.cshtml" />
     <None Include="Views\Home\DonationReciept.cshtml" />

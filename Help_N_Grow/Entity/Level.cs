@@ -32,7 +32,9 @@ namespace Help_N_Grow.Entity
         public string Package_Name { get; set; }
 
         public int MemberCount { get; set; }
-
         
+        public int Branchfee { get; set; }
+
+
     }
 }

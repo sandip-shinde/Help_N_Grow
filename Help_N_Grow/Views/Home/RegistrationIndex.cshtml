@@ -37,21 +37,23 @@
 <h3><b style="color:deeppink"> @ViewBag.UpgradedMessage</b></h3>
 @if (Model.registration.Level_Id == 1 || Model.registration.Level_Id == 4 || Model.registration.Level_Id == 7)
 {
-	<p>
-		@if (Model.showCreate == "true")
-		{
-			<a asp-action="RegistrationCreate" class="btn btn-default">Register New Joinee</a>
-		}
-		@if (Model.showCreate == "Pending")
-		{
-			<span style="color:orangered"> follow up for approve transaction to complete step</span>
-		}@if (Model.showCreate == "false")
-		{
-			<span style="color:orangered"> Upgrade to next level and Get More Benefits</span>
-			@*<a asp-area="" asp-controller="Home" asp-action="MemberUpgradeToNextLevel"  asp-route-id="@ViewBag.Parent_Id"> Upgrade To Next Step</a>*@
+<p>
+	@if (Model.showCreate == "true")
+	{
+		<a asp-action="RegistrationCreate" class="btn btn-success">Register New Joinee</a>
+		 <a asp-action="downloadmembershipSlip"  asp-route-id="@ViewBag.Parent_Id" >Registration Form</a>
 
-		}
-	</p>
+	}
+	@if (Model.showCreate == "Pending")
+	{
+		<span style="color:orangered"> follow up for approve transaction to complete step</span>
+	}@if (Model.showCreate == "false")
+	{
+		<span style="color:orangered"> Upgrade to next level and Get More Benefits</span>
+		@*<a asp-area="" asp-controller="Home" asp-action="MemberUpgradeToNextLevel"  asp-route-id="@ViewBag.Parent_Id"> Upgrade To Next Step</a>*@
+
+	}
+</p>
 }
 else
 {

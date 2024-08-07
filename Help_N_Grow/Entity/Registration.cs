@@ -43,6 +43,7 @@ namespace Help_N_Grow.Entity
         [Display(Name = "User Name")]
         public string UserName { get; set; }
         //hiden ID
+        [DisplayFormat(DataFormatString = "{0:dd/MM/yyyy}")]
         public DateTime Reg_Date { get; set; }
         public int Level_Id { get; set; }
         public int Parent_Id { get; set; }

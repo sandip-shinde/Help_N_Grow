@@ -223,113 +223,113 @@ namespace Help_N_Grow.Controllers
             return View(level);
         }
 
-        // GET: Levels/Create
-        [Authorize]
-        public IActionResult Create()
-        {
-            return View();
-        }
+        //// GET: Levels/Create
+        //[Authorize]
+        //public IActionResult Create()
+        //{
+        //    return View();
+        //}
 
-        // POST: Levels/Create
-        // To protect from overposting attacks, please enable the specific properties you want to bind to, for 
-        // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
-        [Authorize]
-        [HttpPost]
-        [ValidateAntiForgeryToken]
-        public async Task<IActionResult> LevelCreate([Bind("Level_Id,Level_Name,Company_Percentage,Amount")] Level level)
-        {
-            if (ModelState.IsValid)
-            {
-                _context.Add(level);
-                await _context.SaveChangesAsync();
-                return RedirectToAction(nameof(LevelIndex));
-            }
-            return View(level);
-        }
+        //// POST: Levels/Create
+        //// To protect from overposting attacks, please enable the specific properties you want to bind to, for 
+        //// more details see http://go.microsoft.com/fwlink/?LinkId=317598.
+        //[Authorize]
+        //[HttpPost]
+        //[ValidateAntiForgeryToken]
+        //public async Task<IActionResult> LevelCreate([Bind("Level_Id,Level_Name,Company_Percentage,Amount")] Level level)
+        //{
+        //    if (ModelState.IsValid)
+        //    {
+        //        _context.Add(level);
+        //        await _context.SaveChangesAsync();
+        //        return RedirectToAction(nameof(LevelIndex));
+        //    }
+        //    return View(level);
+        //}
 
-        // GET: Levels/Edit/5
-        [Authorize]
-        public async Task<IActionResult> LevelEdit(int? id)
-        {
-            if (id == null)
-            {
-                return NotFound();
-            }
+        //// GET: Levels/Edit/5
+        //[Authorize]
+        //public async Task<IActionResult> LevelEdit(int? id)
+        //{
+        //    if (id == null)
+        //    {
+        //        return NotFound();
+        //    }
 
-            var level = await _context.Level.FindAsync(id);
-            if (level == null)
-            {
-                return NotFound();
-            }
-            return View(level);
-        }
+        //    var level = await _context.Level.FindAsync(id);
+        //    if (level == null)
+        //    {
+        //        return NotFound();
+        //    }
+        //    return View(level);
+        //}
 
-        // POST: Levels/Edit/5
-        // To protect from overposting attacks, please enable the specific properties you want to bind to, for 
-        // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
-        [HttpPost]
-        [ValidateAntiForgeryToken]
-        [Authorize]
-        public async Task<IActionResult> LevelEdit(int id, [Bind("Level_Id,Level_Name,Company_Percentage,Amount")] Level level)
-        {
-            if (id != level.Level_Id)
-            {
-                return NotFound();
-            }
+        //// POST: Levels/Edit/5
+        //// To protect from overposting attacks, please enable the specific properties you want to bind to, for 
+        //// more details see http://go.microsoft.com/fwlink/?LinkId=317598.
+        //[HttpPost]
+        //[ValidateAntiForgeryToken]
+        //[Authorize]
+        //public async Task<IActionResult> LevelEdit(int id, [Bind("Level_Id,Level_Name,Company_Percentage,Amount")] Level level)
+        //{
+        //    if (id != level.Level_Id)
+        //    {
+        //        return NotFound();
+        //    }
 
-            if (ModelState.IsValid)
-            {
-                try
-                {
-                    _context.Update(level);
-                    await _context.SaveChangesAsync();
-                }
-                catch (DbUpdateConcurrencyException)
-                {
-                    if (!LevelExists(level.Level_Id))
-                    {
-                        return NotFound();
-                    }
-                    else
-                    {
-                        throw;
-                    }
-                }
-                return RedirectToAction(nameof(LevelIndex));
-            }
-            return View(level);
-        }
+        //    if (ModelState.IsValid)
+        //    {
+        //        try
+        //        {
+        //            _context.Update(level);
+        //            await _context.SaveChangesAsync();
+        //        }
+        //        catch (DbUpdateConcurrencyException)
+        //        {
+        //            if (!LevelExists(level.Level_Id))
+        //            {
+        //                return NotFound();
+        //            }
+        //            else
+        //            {
+        //                throw;
+        //            }
+        //        }
+        //        return RedirectToAction(nameof(LevelIndex));
+        //    }
+        //    return View(level);
+        //}
 
-        // GET: Levels/Delete/5
-        [Authorize]
-        public async Task<IActionResult> LevelDelete(int? id)
-        {
-            if (id == null)
-            {
-                return NotFound();
-            }
+        //// GET: Levels/Delete/5
+        //[Authorize]
+        //public async Task<IActionResult> LevelDelete(int? id)
+        //{
+        //    if (id == null)
+        //    {
+        //        return NotFound();
+        //    }
 
-            var level = await _context.Level
-                .FirstOrDefaultAsync(m => m.Level_Id == id);
-            if (level == null)
-            {
-                return NotFound();
-            }
+        //    var level = await _context.Level
+        //        .FirstOrDefaultAsync(m => m.Level_Id == id);
+        //    if (level == null)
+        //    {
+        //        return NotFound();
+        //    }
 
-            return View(level);
-        }
+        //    return View(level);
+        //}
 
-        // POST: Levels/Delete/5
-        [HttpPost, ActionName("Delete")]
-        [ValidateAntiForgeryToken]
-        [Authorize]
-        public async Task<IActionResult> DeleteConfirmed(int id)
-        {
-            var level = await _context.Level.FindAsync(id);
-            _context.Level.Remove(level);
-            await _context.SaveChangesAsync();
-            return RedirectToAction(nameof(LevelIndex));
-        }
+        //// POST: Levels/Delete/5
+        //[HttpPost, ActionName("Delete")]
+        //[ValidateAntiForgeryToken]
+        //[Authorize]
+        //public async Task<IActionResult> DeleteConfirmed(int id)
+        //{
+        //    var level = await _context.Level.FindAsync(id);
+        //    _context.Level.Remove(level);
+        //    await _context.SaveChangesAsync();
+        //    return RedirectToAction(nameof(LevelIndex));
+        //}
 
         private bool LevelExists(int id)
         {
@@ -430,19 +430,19 @@ namespace Help_N_Grow.Controllers
                 htmlContent += " <div style = 'margin-bottom: 5px; text-align: center;'>";
                 htmlContent += " <h4> REGISTRATION </h4> </div> ";
                 htmlContent += " <p style = 'margin: 0;' >Sr.No: " + registration.Package_Name + "/" + registration.Parent_Id + "/" + registration.Reg_Id + "/" + registration.Level_Id + "</p> ";
-                htmlContent += " <p style = 'margin: 0;' >Date: " + System.DateTime.Now.ToShortDateString() + "</p> ";
-                htmlContent += " <p style = 'margin: 0;' >---------------------------------------------------------</p>";
+                htmlContent += " <p style = 'margin: 0;' >Date: " + System.DateTime.Now.ToString("dd/MM/yyyy") + "</p> ";
+                htmlContent += " <p style = 'margin: 0;' >---------------------------------------------------------------------------</p>";
                 htmlContent += " <p style = 'margin: 0;' > Dear " + registration.Full_Name + "</p> ";
                 htmlContent += " <p style = 'margin: 0;' > Mobile: " + registration.Mobile_No + "</p>  <br>";
                 htmlContent += "  <p style = 'margin: 5px;' >Salutation,</p> ";
                 htmlContent += " <p style = 'margin: 10px;' > Thank you for your Registration with us. your contribution is valuable and it helps our mission.</p>";
                 htmlContent += " <p>your registration is as:  User Name: " + registration.UserName + " and Password: " + registration.Password + "</p> ";
-                htmlContent += " <p style = 'margin: 0;' >--------------------------------------------------------</p>";
+                htmlContent += " <p style = 'margin: 0;' >--------------------------------------------------------------------------</p>";
                 htmlContent += " <p><i> Thank you again for your ongoing support of our mission.</i></p><p style = 'margin:5px;'><b>Sincerely.</b></p>";
                 htmlContent += " <p><b>Economic Help and Growth Center      </b></p>";
                 htmlContent += " <p>Registration Status : <b>" + Status + "</b></p>";
-                htmlContent += "<h6> <p>Note :  Your joining is only considered after status approved</p>";
-                htmlContent += " <div>       2) Registration & Help amount is not refundable.</div></h6>";
+                htmlContent += "<p style='font-size: 8px;'>Note :  Your joining is only considered after status approved";
+                htmlContent += "        2) Registration & Help amount is not refundable.</p>";
                 htmlContent += "</div>";
                 PdfGenerator.AddPdfPages(data, htmlContent, PageSize.A4);
                 byte[] response = null;
@@ -451,7 +451,7 @@ namespace Help_N_Grow.Controllers
                     data.Save(ms);
                     response = ms.ToArray();
                 }
-                string fileName = "Member_" + registration.Parent_Id + "_" + registration.Reg_Id + "_ " + registration.Level_Id + ".pdf";
+                string fileName = "Registration" + registration.Parent_Id + "_" + registration.Reg_Id + "_ " + registration.Level_Id + ".pdf";
                 return File(response, "application/pdf", fileName);
             }
             catch (Exception ex)
@@ -468,14 +468,21 @@ namespace Help_N_Grow.Controllers
             try
             {
                 var registration = await _context.Registration.Where(e => e.Reg_Id == id).FirstOrDefaultAsync();
+                var level = await _context.Level.Where(e => e.Level_Id == registration.Level_Id).FirstOrDefaultAsync();
+
                 var anytransaction = await _context.TblTransaction.Where(e => e.Reg_Id == id && e.Level_Id == registration.Level_Id).AnyAsync();
                 string Status = "Not Approved";
                 if (anytransaction)
                 {
                     var transaction = await _context.TblTransaction.Where(e => e.Reg_Id == id && e.Level_Id == registration.Level_Id).FirstOrDefaultAsync();
-                    Status = transaction.Is_Approved == true ? "Approved" : "Not Approved";
+                    if (transaction.Is_Approved == true)
+                    { Status = "Approved"; }
+                    else {
+                        Status = "Not Approved";
+                    }
                 }
-
+                if(id==3|| id == 5 || id == 6)
+                    Status = "Approved";
                 // var registration =await _context.Registration.Where(e => e.Reg_Id == id).FirstOrDefaultAsync();
 
 
@@ -485,37 +492,52 @@ namespace Help_N_Grow.Controllers
                 htmlContent += "<img src = '.\\wwwroot\\Logo_Img\\Economic_Help_Logo.JPG' alt = 'Logo' style = 'max-width: 100px; margin-bottom: 5px;' > </div>";
                 htmlContent += " <div style = 'margin-bottom: 3px; text-align: center;'>";
                 htmlContent += " <h4> JOINING REGISTRATION </h4> </div> ";
-                htmlContent += " <p style = 'margin: 0;' >Sr.No: " + registration.Package_Name + "/" + registration.Parent_Id + "/" + registration.Reg_Id + "/" + registration.Level_Id + "--------------------------- Date: " + System.DateTime.Now.ToShortDateString() + "</p> ";
-                htmlContent += " <p>Ref. Status : <b>" + Status + "</b></p>";
-                htmlContent += " <p style = 'margin: 0;' >*************************************************************************</p> ";
-                htmlContent += " <div style = 'margin: 0;' ><b>Ref. Details</b>-------------------------------------------------------</div>";
+                htmlContent += " <p style = 'margin: 0;' >Sr.No: " + registration.Package_Name + "/" + registration.Parent_Id + "/" + registration.Reg_Id + "/" + registration.Level_Id + "------------------------------------------------------ Date: " + System.DateTime.Now.ToString("dd/MM/yyyy") + "</p> ";
+                htmlContent += " <p>Form Status : <b>" + Status== "Approved" ? "A":"N.A." + "</b></p>";
+                htmlContent += " <p style = 'margin: 0;' >*************************************************************************************************************</p> ";
+                htmlContent += " <div style = 'margin: 0;' ><b>Registration Details</b>________________________________________________________________________________________</div>";
                 //htmlContent += " <div style = 'margin: 0;' > Reference Transaction No: ---------------------------------------</div>   <br>";
-                htmlContent += " <div style = 'margin: 0;' > Full_Name: ---------------------------------Mobile: ----------------------</div> ";
-                htmlContent += " <div style = 'margin: 0;' > Your Bank A/c No: --------------------------- IFSC Code: ---------------</div> ";
-                htmlContent += " <div style = 'margin: 0;' >Phone pay/G pay UPI ID: -------------------------------------</div> ";
-                htmlContent += " <div style = 'margin: 0;' >User Name: ------------------Password : ----------------</div> ";
-                htmlContent += " <div style = 'margin: 0;' > Reason for help: ----------------------------------------------</div>  <br>";
+                htmlContent += " <div style = 'margin: 0;' > Full_Name: ----------------------------------------------------------------- Mobile: -----------------------</div> ";
+                htmlContent += " <div style = 'margin: 0;' > Your Bank A/c No: ----------------------------------------------- IFSC Code: ---------------------</div> ";
+                htmlContent += " <div style = 'margin: 0;' >Phone pay/G pay UPI ID: --------------------------------------------</div> ";
+                htmlContent += " <div style = 'margin: 0;' >User Name: ---------------------------------- Password : ---------------------------</div> ";
+                htmlContent += " <div style = 'margin: 0;' > Reason for help: _____________________________________________________________________________</div>  <br>";
+                htmlContent += " <p style = 'margin: 0;' >*************************************************************************************************************</p> ";
+
                 htmlContent += "</div> <div> <table style = 'border-collapse: collapse;'><tr><td><div>  ";
                 //htmlContent += " <div style = 'margin: 0;' >--------------------------Other Details----------------------------</div>";
-                htmlContent += " Branch A/c Details</div></td><td><div> ";
-                htmlContent += " Help A/c Details</div></td></tr>";
+                htmlContent += " Branch A/c Details Amount <b>" + level .Company_Percentage+ "</b></div></td><td><div> ";
+                htmlContent += " Help A/c Details Amount <b>" + level.Self_Amount+ "</b></div></td></tr>";
                 htmlContent += "<tr><td><div>  ";
-                htmlContent += " <div style = 'margin: 0;' > Company Transaction No: ------------- -----------  -----------</div> ";
-                //htmlContent += " <div style = 'margin: 0;' >Bank Name:--- " + registration.Mobile_No + "---</div>";
-                //htmlContent += " <div style = 'margin: 0;' >Bank A/c No: ---" + registration?.Bank_AC + " IFSC Code:---- " + registration?.IFSC_Code + "---</div>";
-                htmlContent += " <div style = 'margin: 0;' >Phone pay/G pay UPI ID:--- " + registration?.UPI_ID + "---</div>  <br> ";
+                htmlContent += " <div style = 'margin: 0;' > Company Transaction No: ------------- -----------  ------</div> ";
+                //htmlContent += " <div style = 'margin: 0;' >Bank Name:--- " + State Bank of india + "---</div>";
+                htmlContent += " <div style = 'margin: 0;' >Bank A/c No: ---<b>  43196315462 </b> --- <div>IFSC Code:----<b>  SBIN0040524 </b> ---</div></div>";
+                htmlContent += " <div style = 'margin: 0;' >Phone pay/G pay UPI ID:---<b>helpandgrow@ybl </b>---</div>  <br> ";
+                htmlContent += " <div style = 'margin: 0;' >Entry Username:-"+registration.UserName+"-</div>  <br> ";
                 htmlContent += " </div></td><td><div> ";
 
-                htmlContent += " <div style = 'margin: 0;' > REf. Trans.No: ------------- --------- --------</div> ";
-                //htmlContent += " <div style = 'margin: 0;' > Name: ---" + registration.Full_Name + "  Mobile: " + registration.Mobile_No + "---------------------</div>";
-               // htmlContent += " <div style = 'margin: 0;' > Help Bank A/c No: ---" + registration?.Bank_AC + " IFSC Code:--- " + registration?.IFSC_Code + "---</div>";
-                htmlContent += " <div style = 'margin: 0;' >Help Phone pay/G pay UPI ID: ---" + registration?.UPI_ID + "---</div>  <br> ";
-                htmlContent += " </div></td></tr><tr><td colspan='2'><div> ";
-
+                htmlContent += " <div style = 'margin: 0;' > Help Trans.No: ------------- --------- -------- ------</div> ";
+                htmlContent += " <div style = 'margin: 0;' > Name: ---" + registration.Full_Name + "</div>";
+                htmlContent += " <div style = 'margin: 0;' > Help Bank A/c No: ---<b>" + registration?.Bank_AC + "</b>---<div> IFSC Code:--- <b>" + registration?.IFSC_Code + "</b>---</div></div>";
+                htmlContent += " <div style = 'margin: 0;' >Help Phone pay/G pay UPI ID: ---<b>" + registration?.UPI_ID + "</b>---</div>  <br> ";
+                htmlContent += " <div style = 'margin: 0;' >Pass: -" + registration?.Password + "-</div>  <br> ";
+                htmlContent += " </div></td></tr><tr><td><div>";
+                htmlContent += "<img src = '.\\wwwroot\\Logo_Img\\OfficeQR.JPG' alt = 'QR' style = 'max-width: 100px; margin-bottom: 5px;' /></td><td><div>";
+                htmlContent += " </div></td></tr><tr><td colspan='2'><div> ";                
                 htmlContent += " <div style = 'margin: 10px;' > Thank you for joining with us. your contribution is valuable and it helps our mission.</div>";
-                htmlContent += "<h6> <div>Note : 1) Joining is only considered after status approved.</div>";
-                htmlContent += " <div>       2) Registration & Help amount is not refundable.</div></h6>";
-                htmlContent += " <div>        Signature.</div>";
+               // htmlContent += "<p style='font-size: 8px;'> <div>*Note T&C: 1) Joining is only considered after status approved. Registration & Help amount is not refundable.</div></p>";
+                htmlContent += "<p><div>1. The primary purpose of the help center is to provide financial assistance to those in need, and for this, the help center only charges a service fee. The help center acts solely as a link between the helper and the recipient, with no other involvement.</div>";
+                htmlContent += "<div>2. All transactions at the help center office will be conducted via QR code or bank transfer. (Only Form fees <b>Rupees " + level.Branchfee+"</b> will be accepted in cash.)</div>";
+
+                htmlContent += "<div>3. All assistance provided and the service charge of the help center are given voluntarily and with full consent. The assistance given will not be refunded, and I will not request any refund.</div>";
+
+                htmlContent += "<div>4. If the above steps are not fully completed, an additional 10 % amount will not be received from the help center.</div>";
+
+                htmlContent += "<div>5. I accept all the terms and conditions of the help center, and I am fully willing to provide assistance to the above - mentioned person.</div>";
+
+                htmlContent += "<div>6. When visiting the help center, it is mandatory to bring the original form. Joining is only considered after status approved.</p>";
+                // htmlContent += " </p><p><div>1) Help Center का प्रमुख उद्देश्य केवल जरूरतमंद लोगों को आर्थिक सहायता प्रदान करना है, और इसके लिए मदद केंद्र केवल सेवा शुल्क लेता है। यह मदद केंद्र सिर्फ एक लिंक के रूप में काम करता है, जो मदद करने वाले और मदद लेने वाले के बीच होता है। </div><div>2) Help Center के कार्यालय में सभी लेन - देन क्यूआर कोड या बैंक ट्रांसफर के माध्यम से किए जाएंगे। (केवल शाखा शुल्क नकद में लिया जाएगा।)</div><div> 3) सभी सहायता और मदद केंद्र का सेवा शुल्क पूरी स्वेच्छा और खुशी से दिया जा रहा है। दी गई सहायता वापस नहीं मिलेगी और मैं भी इस सहायता की वापसी की मांग नहीं करूंगा।</div><div>4)यदि उपरोक्त सभी चरण पूरे नहीं किए जाते हैं, तो अतिरिक्त 10 प्रतिशत राशि मदद केंद्र से प्राप्त नहीं होगी।</div><div>5) Help Center की सभी शर्तें और नियम मुझे स्वीकार्य हैं, और मैं पूरी खुशी से उपरोक्त व्यक्ति को मदद देने के लिए तैयार हूं।</div><div>6) Help Center का दौरा करते समय ओरिजिनल फॉर्म साथ लाना अनिवार्य है।</div></p>";
+                htmlContent += "</p> <div>        Signature.</div>";
                 htmlContent += " </div></td></tr><table>";
                
                 htmlContent += "</div></div>";
@@ -526,7 +548,7 @@ namespace Help_N_Grow.Controllers
                     data.Save(ms);
                     response = ms.ToArray();
                 }
-                string fileName = "Membership_Form_" + registration.Parent_Id + "_" + registration.Reg_Id + "_ " + registration.Level_Id + ".pdf";
+                string fileName = "Registration_Form_" + registration.Parent_Id + "_" + registration.Reg_Id + "_ " + registration.Level_Id + ".pdf";
                 return File(response, "application/pdf", fileName);
             }
             catch (Exception ex)
@@ -548,7 +570,11 @@ namespace Help_N_Grow.Controllers
                 if (anytransaction)
                 {
                     var transaction = await _context.TblTransaction.Where(e => e.Reg_Id == id && e.Level_Id == registration.Level_Id).FirstOrDefaultAsync();
-                    Status = transaction.Is_Approved == true ? "Approved" : "Not Approved";
+                     if (transaction.Is_Approved == true)
+                    {
+                        Status = "Approved";
+                    }
+                    else { Status = "Not Approved"; }
                 }
 
                 var allMember = await _context.Registration.Where(e => e.Parent_Id == id && e.Level_Id == registration.Level_Id).ToListAsync();
@@ -561,7 +587,7 @@ namespace Help_N_Grow.Controllers
                 htmlContent += " <div style = 'margin-bottom: 5px; text-align: center;'>";
                 htmlContent += " <h4> GROUP REGISTRATION </h4> </div> ";
                 htmlContent += " <p style = 'margin: 0;' >Sr.No: " + registration.Package_Name + "/" + registration.Parent_Id + "/" + registration.Reg_Id + "/" + registration.Level_Id + "</p> ";
-                htmlContent += " <p style = 'margin: 0;' >Date: " + System.DateTime.Now.ToShortDateString() + "</p> ";
+                htmlContent += " <p style = 'margin: 0;' >Date: " + System.DateTime.Now.ToString("dd/MM/yyyy") + "</p> ";
                 htmlContent += " <p style = 'margin: 0;' >---------------------------------------------------------</p>";
                 htmlContent += " <p style = 'margin: 0;' > Dear " + registration.Full_Name + "</p> ";
                 htmlContent += " <p style = 'margin: 0;' > Mobile: " + registration.Mobile_No + "</p>  <br>";
@@ -581,8 +607,8 @@ namespace Help_N_Grow.Controllers
                 htmlContent += " <p><i> Thank you again for your ongoing support of our mission.</i></p><p style = 'margin:5px;'><b>Sincerely.</b></p>";
                 htmlContent += " <p><b>Economic Help and Growth Center</b></p>";
                 htmlContent += " <p>Membership Status : <b>" + Status + "</b></p>";
-                htmlContent += "<h6> <p>Note :  Your joining is only considered after status approved</p>";
-                htmlContent += " <div>      Registration & Help amount is not refundable.</div></h6>";
+                htmlContent += "<div style='font-size: 8px;'> <div>Note :  Your joining is only considered after status approved</div>";
+                htmlContent += " <div>      Registration & Help amount is not refundable.</div></div>";
                 htmlContent += "</div>";
                 PdfGenerator.AddPdfPages(data, htmlContent, PageSize.A4);
                 byte[] response = null;
@@ -591,7 +617,7 @@ namespace Help_N_Grow.Controllers
                     data.Save(ms);
                     response = ms.ToArray();
                 }
-                string fileName = "Member_registration_" + registration.Parent_Id + "_" + registration.Reg_Id + "_ " + registration.Level_Id + ".pdf";
+                string fileName = "All_registration_" + registration.Parent_Id + "_" + registration.Reg_Id + "_ " + registration.Level_Id + ".pdf";
                 return File(response, "application/pdf", fileName);
             }
             catch (Exception ex)
@@ -1170,7 +1196,7 @@ namespace Help_N_Grow.Controllers
             var registration = await _context.Registration.Where(e => e.Reg_Id == transaction.Reg_Id && e.Level_Id == transaction.Level_Id).FirstOrDefaultAsync();
 
             var data = new PdfDocument();
-            string htmlContent = "<div style = 'margin: 20px auto; heigth:1000px; max-width: 600px; padding: 20px; border: 1px solid #ccc; background-color: #FFFFFF; font-family: Arial, sans-serif;' >";
+            string htmlContent = "<div style = 'margin: 20px auto; heigth:700px; max-width: 400px; padding: 20px; border: 1px solid #ccc; background-color: #FFFFFF; font-family: Arial, sans-serif;' >";
             htmlContent += "<div style = 'margin-bottom: 20px; text-align: center;'>";
             htmlContent += "<img src = '.\\wwwroot\\Logo_Img\\Economic_Help_Logo.JPG' alt = 'School Logo' style = 'max-width: 100px; margin-bottom: 10px;' >";
             htmlContent += "</div>";
@@ -1419,13 +1445,15 @@ namespace Help_N_Grow.Controllers
                                                  Parent_Id = rg.Parent_Id,
                                                  Level_Id = rg.Level_Id,
                                                  Transaction_ID = tr.Transaction_ID,
-                                                 Transaction_Date = tr.T_Date
+                                                 Transaction_Date = tr.T_Date,
+                                                 Is_Approved=rg.Is_Active
                                              }).ToListAsync();
 
 
             return View(TransactionApproval);
         }
 
+        
         // GET: TransactionApproval
         [Authorize]
         public async Task<IActionResult> TransactionApprovalFilterBy(string IsApproved)
@@ -1477,7 +1505,8 @@ namespace Help_N_Grow.Controllers
                                                  Password = rg.Password,
                                                  Mobile_No = rg.Mobile_No,
                                                  Parent_Id = rg.Parent_Id,
-                                                 Level_Id = rg.Level_Id
+                                                 Level_Id = rg.Level_Id,
+                                                 Is_Approved=rg.Is_Active
                                              }).ToListAsync();
 
             if (!string.IsNullOrWhiteSpace(vmsearch.fillValue))
@@ -1493,7 +1522,7 @@ namespace Help_N_Grow.Controllers
                         TransactionApproval = TransactionApproval.Where(a => a.Parent_Id == int.Parse(vmsearch.fillValue)).ToList();
                         break;
                     case "3":
-                        TransactionApproval = TransactionApproval.Where(a => a.Full_Name == vmsearch.fillValue).ToList();
+                        TransactionApproval = TransactionApproval.Where(a => a.Full_Name.StartsWith(vmsearch.fillValue)).ToList();
                         break;
                     case "4":
                         TransactionApproval = TransactionApproval.Where(a => a.Mobile_No == int.Parse(vmsearch.fillValue)).ToList();
@@ -1615,58 +1644,33 @@ namespace Help_N_Grow.Controllers
         }
 
         [Authorize]
-        public async Task<AdminReportsVM> AdminAllMemberCashhInHandLevel()
+        public  AdminReportsVM AdminAllMemberCashhInHandLevel()
         {
 
             AdminReportsVM adminReportsVM = new AdminReportsVM();
 
             //Package
-            var BypackageTotalReport = await _context.TblTransaction.FromSql("select r.package_Name, isnull(sum(Company_Percentage),0) as Company_Percentage from [dbo].[Registration] r left outer join [dbo].[TblTransaction] t on r.[Reg_Id] = t.[Reg_Id] where r.[Package_ID]!=1 group by r.package_Name").ToListAsync();
-            
-            List<AdminReports> BypackageAdminReportList = new List<AdminReports>();
-            foreach (var record in BypackageTotalReport)
-            {
-                BypackageAdminReportList.Add(new AdminReports
-                {
-                    package_Name = record.Package_Name,
-                    Amount = record.Company_Percentage
-                });
-            }
+            var BypackageTotalReport =  _context.Adminpackage_NameReports.FromSql("select r.package_Name as package_Name, isnull(sum(Company_Percentage),0) as Amount,1 as ID from [dbo].[Registration] r left outer join [dbo].[TblTransaction] t on r.[Reg_Id] = t.[Reg_Id] where r.[Package_ID]!=1 group by r.package_Name");
+
+           // List<Adminpackage_NameReports> BypackageAdminReportList = BypackageTotalReport.ToList();
+
 
             //package and level
-            var BypackageandlevelReport = await _context.TblTransaction.FromSql("select r.package_Name as Package_Name,r.Level_Id as Level_Id,isnull(sum(Company_Percentage),0) as Company_Percentage from [dbo].[Registration] r left outer join [dbo].[TblTransaction] t on r.[Reg_Id] = t.[Reg_Id] where r.[Package_ID]!=1 group by r.package_Name,r.Level_Id order by amount desc").ToListAsync();
-               
-            List<AdminReports> Bypackageandlevel_AdminReportList = new List<AdminReports>();
-            foreach (var record in BypackageandlevelReport)
-            {
-                Bypackageandlevel_AdminReportList.Add(new AdminReports
-                {
-                    package_Name = record.Package_Name,
-                    Level=record.Level_Id,
-                    Amount = record.Company_Percentage
-                });
-            }
+            var BypackageandlevelReport =  _context.Adminpackage_Name_Level_Reports.FromSql("select r.package_Name as Package_Name,r.Level_Id as Level,'' as Full_Name,isnull(sum(Company_Percentage),0) as Amount,2 as ID from [dbo].[Registration] r left outer join [dbo].[TblTransaction] t on r.[Reg_Id] = t.[Reg_Id] where r.[Package_ID]!=1 group by r.package_Name,r.Level_Id order by amount desc");
 
-            //package, level and Member
-            //var BypackageandlevelandMemberReport = await _context.TblTransaction.FromSql("select r.package_Name as package_Name, r.Level_Id as Level_Id, r.Full_Name as Transaction_No, isnull(sum(Company_Percentage), 0) as Company_Percentage from[dbo].[Registration] r left outer join[dbo].[TblTransaction] t on r.[Reg_Id] = t.parent_id where r.[Package_ID] != 1 group by r.package_Name, r.Level_Id, r.Full_Name order by amount desc").ToListAsync();
+            //List<Adminpackage_Name_Level_Reports> Bypackageandlevel_AdminReportList = BypackageandlevelReport;
 
-            //List<AdminReports> BypackageandlevelAndMember_AdminReportList = new List<AdminReports>();
-            //foreach (var record in BypackageandlevelandMemberReport)
-            //{
-            //    BypackageandlevelAndMember_AdminReportList.Add(new AdminReports
-            //    {
-            //        package_Name = record.Package_Name,
-            //        Level = record.Level_Id,
-            //        Full_Name=record.Transaction_No,
-            //        Amount = record.Company_Percentage
-            //    });
-            //}
 
-            adminReportsVM.Bypackage_Report = BypackageAdminReportList;
-            adminReportsVM.BypackageAndLevel_Report = Bypackageandlevel_AdminReportList;
-            //adminReportsVM.BypackageLevelAndMember_Report = BypackageandlevelAndMember_AdminReportList;
+            // package, level and Member
+            var BypackageandlevelandMemberReport =  _context.Adminpackage_Name_Level_Name_Reports.FromSql("select r.package_Name as package_Name, r.Level_Id as Level, r.Full_Name as Full_Name, isnull(sum(Company_Percentage), 0) as Amount,3 as ID from[dbo].[Registration] r left outer join[dbo].[TblTransaction] t on r.[Reg_Id] = t.parent_id where r.[Package_ID] != 1 group by r.package_Name, r.Level_Id, r.Full_Name order by amount desc");
 
-            return adminReportsVM;
+            //List<Adminpackage_Name_Level_Name_Reports> BypackageandlevelAndMember_AdminReportList = BypackageandlevelandMemberReport;
+
+            adminReportsVM.Adminpackage_NameReports =  BypackageTotalReport.ToList();
+            adminReportsVM.Adminpackage_Name_Level_Reports = BypackageandlevelReport.ToList();
+            adminReportsVM.Adminpackage_Name_Level_Name_Reports = BypackageandlevelandMemberReport.ToList();
+
+            return  adminReportsVM;
         }
         #endregion
     }
