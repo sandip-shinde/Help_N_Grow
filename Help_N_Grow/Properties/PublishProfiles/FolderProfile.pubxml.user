@@ -6,11 +6,11 @@ by editing this MSBuild file. In order to learn more about this please visit htt
 <Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
   <PropertyGroup>
     <TimeStampOfAssociatedLegacyPublishXmlFile />
-    <_PublishTargetUrl>D:\Help_Plan_All\Help_Plan_Publish</_PublishTargetUrl>
+    <_PublishTargetUrl>D:\Help_Plan_All\Help_Plan_Publish\Help_N_Grow</_PublishTargetUrl>
   </PropertyGroup>
   <ItemGroup>
     <DestinationConnectionStrings Include="connectionstr">
-      <Value>Data Source=N1NWPLSK12SQL-v01.shr.prod.ams1.secureserver.net%3bInitial Catalog=HelpNGrowth%3bUser ID=HelpPlan_User%3bPassword=User_HelpPlan%3bConnect Timeout=300%3bEncrypt=False%3bTrustServerCertificate=False%3bApplicationIntent=ReadWrite%3bMultiSubnetFailover=False</Value>
+      <Value>Data Source=N1NWPLSK12SQL-v01.shr.prod.ams1.secureserver.net%3bInitial Catalog=HelpNGrowth%3bUser ID=HelpPlan_User%3bPassword=HelpNGrow_User%3bConnect Timeout=300%3bEncrypt=False%3bTrustServerCertificate=False%3bApplicationIntent=ReadWrite%3bMultiSubnetFailover=False</Value>
     </DestinationConnectionStrings>
   </ItemGroup>
 </Project>

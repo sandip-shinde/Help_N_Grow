@@ -38,6 +38,7 @@ namespace Help_N_Grow.Entity
         [Display(Name = "Company Transaction Amount")]
         public decimal? Company_Percentage { get; set; }
 
+        [DisplayFormat(DataFormatString = "{0:dd/MM/yyyy}")]
         public DateTime? T_Date { get; set; }
 
         public byte[] MemberTransactionPhoto { get; set; }
@@ -50,6 +51,7 @@ namespace Help_N_Grow.Entity
         [Display(Name = "Package Name")]
         public string Package_Name { get; set; }
     }
+
     public class Transaction_Upload
     {
 
@@ -104,17 +106,36 @@ namespace Help_N_Grow.Entity
 
     public class AdminReportsVM
     {
-        public  List<AdminReports> Bypackage_Report { get; set; }
-        public List<AdminReports> BypackageAndLevel_Report { get; set; }
-        public List<AdminReports> BypackageLevelAndMember_Report { get; set; }
+        public  List<Adminpackage_NameReports> Adminpackage_NameReports { get; set; }
+        public List<Adminpackage_Name_Level_Reports> Adminpackage_Name_Level_Reports { get; set; }
+        public List<Adminpackage_Name_Level_Name_Reports> Adminpackage_Name_Level_Name_Reports { get; set; }
 
     }
     
-   public class AdminReports
+   public class Adminpackage_NameReports
     {
+        [Key]
+        public int ID { get; set; }
+        public string package_Name { get; set; }
+        public decimal ? Amount { get; set; }
+    }
+
+    public class Adminpackage_Name_Level_Reports
+    {
+        [Key]
+        public int ID { get; set; }
+        public string package_Name { get; set; }
+        public int Level { get; set; }
+        public decimal? Amount { get; set; }
+    }
+
+    public class Adminpackage_Name_Level_Name_Reports
+    {
+        [Key]
+        public int ID { get; set; }
         public string package_Name { get; set; }
         public int Level { get; set; }
         public string Full_Name { get; set; }
-        public decimal ? Amount { get; set; }
+        public decimal? Amount { get; set; }
     }
 }

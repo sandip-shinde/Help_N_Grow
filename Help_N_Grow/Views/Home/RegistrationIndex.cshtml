@@ -30,28 +30,30 @@
 
 	</div>
 </div>
-<h2>Member List</h2>
+<h2>Registration List</h2>
 
 
 
 <h3><b style="color:deeppink"> @ViewBag.UpgradedMessage</b></h3>
 @if (Model.registration.Level_Id == 1 || Model.registration.Level_Id == 4 || Model.registration.Level_Id == 7)
 {
-	<p>
-		@if (Model.showCreate == "true")
-		{
-			<a asp-action="RegistrationCreate" class="btn btn-primary">Register New Member</a>
-		}
-		@if (Model.showCreate == "Pending")
-		{
-			<span style="color:orangered"> follow up for approve transaction to complete step</span>
-		}@if (Model.showCreate == "false")
-		{
-			<span style="color:orangered"> Upgrade to next level and Get More Benefits</span>
-			@*<a asp-area="" asp-controller="Home" asp-action="MemberUpgradeToNextLevel"  asp-route-id="@ViewBag.Parent_Id"> Upgrade To Next Step</a>*@
+<p>
+	@if (Model.showCreate == "true")
+	{
+		<a asp-action="RegistrationCreate" class="btn btn-success">Register New Joinee</a>
+		 <a asp-action="downloadmembershipSlip"  asp-route-id="@ViewBag.Parent_Id" >Registration Form</a>
 
-		}
-	</p>
+	}
+	@if (Model.showCreate == "Pending")
+	{
+		<span style="color:orangered"> follow up for approve transaction to complete step</span>
+	}@if (Model.showCreate == "false")
+	{
+			<span style="color:orangered">Congratulations !!! you have completed the level, Upgrade to next level and Get More Benefits</span>
+		@* <a asp-area="" asp-controller="Home" asp-action="MemberUpgradeToNextLevel"  asp-route-id="@ViewBag.Parent_Id"> Upgrade To Next Step</a> *@
+
+	}
+</p>
 }
 else
 {
@@ -65,12 +67,12 @@ else
 				<table class="table">
 					<tr><td colspan="5"><b style="color:red">   </b></td></tr>
 					<tr>
-						<td><a asp-action="RegistrationCreate" class="btn btn-primary">Register New Member</a></td>
+						<td><a asp-action="RegistrationCreate" class="btn btn-default">Register New Joinee</a></td>
 
 						<td>
 							<div class="wrap">
-								<button type="button" class="btn btn-primary" onclick="ShowHide()">
-									View Old Member
+								<button type="button" class="btn btn-default" onclick="ShowHide()">
+									View Old Joinee
 								</button>
 							</div>
 						</td>
@@ -78,7 +80,7 @@ else
 				</table>
 				<form asp-action="RegistrationOld">
 					<table id="tblOldMember" style="display:none">
-						<thead style="background-color:#d3d7da !important"><tr><th>Member ID</th><th>Full Name</th><th></th></tr></thead>
+						<thead style="background-color:#d3d7da !important"><tr><th> ID</th><th>Full Name</th><th></th></tr></thead>
 						@foreach (var member in Model.oldMemberLst)
 						{
 							<tr>
@@ -87,7 +89,7 @@ else
 								<td>
 									<input type="text" id="MemberID" name="MemberID" style="display:none" value="@member.Member_Id" />
 
-									<button type="submit" class="btn btn-info">Add Old Member</button>
+									<button type="submit" class="btn btn-info">Add Old Registration</button>
 								</td>
 							</tr>
 
@@ -101,8 +103,8 @@ else
 				<span style="color:orangered"> follow up for approve transaction to complete step</span>
 			}@if (Model.showCreate == "false")
 			{
-				<span style="color:orangered"> Upgrade to next level and Get More Benefits</span>
-				@*<a asp-area="" asp-controller="Home" asp-action="MemberUpgradeToNextLevel"  asp-route-id="@ViewBag.Parent_Id"> Upgrade To Next Step</a>*@
+				<span style="color:orangered"> Congratulations !!! you have completed the level, Upgrade to next level and Get More Benefits</span>
+			@* 	<a asp-area="" asp-controller="Home" asp-action="MemberUpgradeToNextLevel"  asp-route-id="@ViewBag.Parent_Id"> Upgrade To Next Step</a> *@
 			}
 		</div>
 	</div>
@@ -111,7 +113,8 @@ else
 <table class="table" id="Membertbl">
 	<thead>
 		<tr>
-			<th>Download Membership</th>
+			<th>Download </th>
+			<th>Self Copy</th>
 			<th>
 
 				Is_Approved
@@ -127,20 +130,20 @@ else
 				Mobile_No
 			</th>
 			@*	<th>
-					@Html.DisplayNameFor(model => model.Registrationobj.Bank_AC)
-				</th>
-				<th>
-					@Html.DisplayNameFor(model => model.Registrationobj.IFSC_Code)
-				</th>
-				<th>
-					@Html.DisplayNameFor(model => model.Registrationobj.UPI_ID)
-				</th>
-				<th>
-					@Html.DisplayNameFor(model => model.Registrationobj.Term_Condition_Accepted)
-				</th>
-					<th>
-						@Html.DisplayNameFor(model => model.Registrationobj.Reg_Date)
-					</th>*@
+			@Html.DisplayNameFor(model => model.Registrationobj.Bank_AC)
+		</th>
+		<th>
+			@Html.DisplayNameFor(model => model.Registrationobj.IFSC_Code)
+		</th>
+		<th>
+			@Html.DisplayNameFor(model => model.Registrationobj.UPI_ID)
+		</th>
+		<th>
+			@Html.DisplayNameFor(model => model.Registrationobj.Term_Condition_Accepted)
+		</th>
+			<th>
+				@Html.DisplayNameFor(model => model.Registrationobj.Reg_Date)
+			</th>*@
 			<th>
 
 				Level_Id
@@ -162,7 +165,9 @@ else
 			<tr>
 				<td>
 					<a asp-action="downloadmembershipSlip" style="display:@Is_Approved" asp-route-id="@item.Registrationobj.Reg_Id" class="btn btn-primary">Registration Slip</a>
-				</td>
+				</td><td>
+	<a asp-action="downloadmembershipSlipSelf" style="display:@Is_Approved" asp-route-id="@item.Registrationobj.Reg_Id" class="btn btn-primary">Self Slip</a>
+</td>
 				<td style="@style">
 					@Html.DisplayFor(modelItem => item.Is_Approved)
 				</td>
@@ -218,9 +223,9 @@ else
 		}
 	</tbody>
 </table>
-@if (Model.RegistrationoVMLst.Count != 0)
+@*@if (Model.RegistrationoVMLst.Count >= 0)
 {
 <p>
-	<a asp-action="downloadAllmembershipSlip" asp-route-id="@Model.registration.Reg_Id" class="btn btn-primary">Download My All Member List</a>
+	<a asp-action="downloadAllmembershipSlip" asp-route-id="@Model.registration.Reg_Id" class="btn btn-primary">Download My All List</a>
 </p>
-}
+}*@
