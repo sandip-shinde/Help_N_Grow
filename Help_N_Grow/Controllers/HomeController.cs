@@ -159,9 +159,9 @@ namespace Help_N_Grow.Controllers
                     }
                 }
             }
-            catch (Exception ex)
+            catch (Exception)
             {
-                throw ex.InnerException;
+                throw;
 
             }
         }
@@ -1565,7 +1565,7 @@ namespace Help_N_Grow.Controllers
         [HttpPost]
         [Authorize]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> TransactionApprovalEdit(int id, [Bind("Transaction_ID,Upload_Path,Transaction_No,Is_Approved,Reg_Id,Level_Id")] TblTransaction transaction)
+        public async Task<IActionResult> TransactionApprovalEdit(int id, [Bind("Transaction_ID,Upload_Path,Transaction_No,Is_Approved,Reg_Id,Level_Id,Note")] TblTransaction transaction)
         {
             bool transactionApproved = transaction.Is_Approved;
             string Note = transaction.Note;
@@ -1633,44 +1633,45 @@ namespace Help_N_Grow.Controllers
             return result > 1 ? true : false;
         }
 
+
         #endregion
 
         #region Admin Reports
         [Authorize]
         public async Task<List<Registration>> AdminAllMemberChildList()
         {
-            var AllMemberChildList = await _context.Registration.FromSql("SELECT s.Reg_Id, s.Full_Name, ((SELECT COUNT(*) FROM [Registration] c WHERE c.Parent_Id = s.Reg_Id ) + (SELECT COUNT(*) FROM [Registration] c JOIN [Registration] p  ON p.Parent_Id = c.Reg_Id  WHERE c.Parent_Id = s.Reg_Id ) ) as child_count FROM [Registration] s").ToListAsync();
+            var AllMemberChildList = await _context.Registration.FromSqlInterpolated($"SELECT s.Reg_Id, s.Full_Name, ((SELECT COUNT(*) FROM [Registration] c WHERE c.Parent_Id = s.Reg_Id ) + (SELECT COUNT(*) FROM [Registration] c JOIN [Registration] p  ON p.Parent_Id = c.Reg_Id  WHERE c.Parent_Id = s.Reg_Id ) ) as child_count FROM [Registration] s").ToListAsync();
             return AllMemberChildList;
         }
 
         [Authorize]
-        public  AdminReportsVM AdminAllMemberCashhInHandLevel()
+        public async Task<IActionResult>  AdminAllMemberCashhInHandLevel()
         {
 
             AdminReportsVM adminReportsVM = new AdminReportsVM();
 
             //Package
-            var BypackageTotalReport =  _context.Adminpackage_NameReports.FromSql("select r.package_Name as package_Name, isnull(sum(Company_Percentage),0) as Amount,1 as ID from [dbo].[Registration] r left outer join [dbo].[TblTransaction] t on r.[Reg_Id] = t.[Reg_Id] where r.[Package_ID]!=1 group by r.package_Name");
+            var BypackageTotalReport =  _context.Adminpackage_NameReports.FromSqlInterpolated($"select r.package_Name as package_Name, isnull(sum(Company_Percentage),0) as Amount,1 as ID from [dbo].[Registration] r left outer join [dbo].[TblTransaction] t on r.[Reg_Id] = t.[Reg_Id]  group by r.package_Name");
 
-           // List<Adminpackage_NameReports> BypackageAdminReportList = BypackageTotalReport.ToList();
+            List<Adminpackage_NameReports> BypackageAdminReportList = BypackageTotalReport.ToList();
 
 
             //package and level
-            var BypackageandlevelReport =  _context.Adminpackage_Name_Level_Reports.FromSql("select r.package_Name as Package_Name,r.Level_Id as Level,'' as Full_Name,isnull(sum(Company_Percentage),0) as Amount,2 as ID from [dbo].[Registration] r left outer join [dbo].[TblTransaction] t on r.[Reg_Id] = t.[Reg_Id] where r.[Package_ID]!=1 group by r.package_Name,r.Level_Id order by amount desc");
+            var BypackageandlevelReport =  _context.Adminpackage_Name_Level_Reports.FromSqlInterpolated($"select r.package_Name as Package_Name,r.Level_Id as Level,'' as Full_Name,isnull(sum(Company_Percentage),0) as Amount,2 as ID from [dbo].[Registration] r left outer join [dbo].[TblTransaction] t on r.[Reg_Id] = t.[Reg_Id]  group by r.package_Name,r.Level_Id order by amount desc");
 
-            //List<Adminpackage_Name_Level_Reports> Bypackageandlevel_AdminReportList = BypackageandlevelReport;
+            List<Adminpackage_Name_Level_Reports> Bypackageandlevel_AdminReportList = BypackageandlevelReport.ToList();
 
 
             // package, level and Member
-            var BypackageandlevelandMemberReport =  _context.Adminpackage_Name_Level_Name_Reports.FromSql("select r.package_Name as package_Name, r.Level_Id as Level, r.Full_Name as Full_Name, isnull(sum(Company_Percentage), 0) as Amount,3 as ID from[dbo].[Registration] r left outer join[dbo].[TblTransaction] t on r.[Reg_Id] = t.parent_id where r.[Package_ID] != 1 group by r.package_Name, r.Level_Id, r.Full_Name order by amount desc");
+            var BypackageandlevelandMemberReport =  _context.Adminpackage_Name_Level_Name_Reports.FromSqlInterpolated($"select r.package_Name as package_Name, r.Level_Id as Level, r.Full_Name as Full_Name, isnull(sum(Company_Percentage), 0) as Amount,3 as ID from[dbo].[Registration] r left outer join[dbo].[TblTransaction] t on r.[Reg_Id] = t.parent_id  where t.Self_Amount>0 group by r.package_Name, r.Level_Id, r.Full_Name order by amount desc");
 
-            //List<Adminpackage_Name_Level_Name_Reports> BypackageandlevelAndMember_AdminReportList = BypackageandlevelandMemberReport;
+            List<Adminpackage_Name_Level_Name_Reports> BypackageandlevelAndMember_AdminReportList = BypackageandlevelandMemberReport.ToList();
 
-            adminReportsVM.Adminpackage_NameReports =  BypackageTotalReport.ToList();
-            adminReportsVM.Adminpackage_Name_Level_Reports = BypackageandlevelReport.ToList();
-            adminReportsVM.Adminpackage_Name_Level_Name_Reports = BypackageandlevelandMemberReport.ToList();
+            adminReportsVM.Adminpackage_NameReports = BypackageAdminReportList.ToList();
+            adminReportsVM.Adminpackage_Name_Level_Reports = Bypackageandlevel_AdminReportList.ToList();
+            adminReportsVM.Adminpackage_Name_Level_Name_Reports = BypackageandlevelAndMember_AdminReportList.ToList();
 
-            return  adminReportsVM;
+            return View(adminReportsVM);
         }
         #endregion
     }
